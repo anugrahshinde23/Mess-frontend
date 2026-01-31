@@ -57,7 +57,7 @@ const OwnerDashBoard = () => {
     try {
       const res = await getMessApi()
       setMessData(res)
-      console.log(res);
+      // console.log(res);
       
     } catch (error) {
       toast.error("Failed to fetch the data")

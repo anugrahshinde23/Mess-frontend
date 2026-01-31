@@ -73,7 +73,9 @@ const OrderHistoryPageCustomer = () => {
                 <th className="border p-2">Meal Type</th>
                 <th className="border p-2">Items</th>
                 <th className="border p-2">Date</th>
-                <th className="border p-2">Status</th>
+                <th className="border p-2">Status</th> 
+                <th className="border p-2">Shipping</th>
+                <th className="border p-2">Code</th>
                 <th className="border p-2">Action</th>
               </tr>
             </thead>
@@ -85,6 +87,8 @@ const OrderHistoryPageCustomer = () => {
                   <td className="border p-2 text-center">{o.items.length}</td>
                   <td className="border p-2 text-center">{o.orderDate}</td>
                   <td className="border p-2 text-center">{o.status}</td>
+                  <td className="border p-2 text-center">{o.orderShippingType}</td>
+                  <td className="border p-2 text-center">{o.orderCompleteCode}</td>
                   <td className="border p-2 text-center">
                     {selectedOrder === "placed" && (
                       <button className="bg-red-500 px-2 py-1 text-white font-bold text-sm cursor-pointer rounded-2xl hover:bg-red-400" onClick={() => {

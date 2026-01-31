@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { getOrderReqApi } from '../../services/order.services'
 import { toast } from 'react-toastify'
+import { approveOrderRequestApi, rejectOrderRequestApi } from '../../services/deliveryBoyServices'
+import CompleteOrderModal from '../owner-components/CompleteOrderModal'
 
 const Orders = ({dBoy}) => {
 
 
   const dBoyId = dBoy?._id
 
+  const [orderId, setOrderId] = useState("")
+
+  const [orderStatus, setOrderStatus] = useState("")
+
   const [orderReq, setOrderReq] = useState([])
+
+  const [openCompleteOrderModal, setOpenCompleteOrderModal] = useState(false)
+
+  const onCloseCompleteOrderModal = () => {
+    setOpenCompleteOrderModal(false)
+  }
 
 
   const handleOrderReq = async () => {
@@ -20,9 +32,31 @@ const Orders = ({dBoy}) => {
 
     try {
       const res = await getOrderReqApi(dBoyId)
-      console.log(res);
+      // console.log(res);
       setOrderReq(res.reqData)
       // toast.success(res.message)
+    } catch (error) {
+      toast.error(error.response?.data?.message)
+    }
+  }
+
+  const handleApproveOrderRequest = async (orderReqId, orderId) => {
+    try {
+      const res = await approveOrderRequestApi({orderReqId, dBoyId, orderId})
+      console.log(res);
+      handleOrderReq()
+      toast.success(res.message)
+    } catch (error) {
+      toast.error(error.response?.data?.message)
+    }
+  }
+
+  const handleRejectOrderRequest = async (orderReqId) => {
+    try {
+      const res = await rejectOrderRequestApi({orderReqId, dBoyId , orderId})
+      console.log(res);
+      handleOrderReq()
+      toast.success(res.message)
     } catch (error) {
       toast.error(error.response?.data?.message)
     }
@@ -79,11 +113,19 @@ const Orders = ({dBoy}) => {
         <th className='p-2 border'>To</th>
         <th className='p-2 border'>Destination</th>
         <th className='p-2 border'>Customer Phone</th>
+        {status === "PENDING" && (
+          <th className='p-2 border'>Action</th>
+        )}
+        {status === "ACCEPTED" &&   (
+          <th className='p-2 border'>Mark Complete</th>
+        )}
+        
       </tr>
     </thead>
     <tbody >
       {orderReq.filter((o) => o.status === status).map((o) => (
-        <tr key={o._id}>
+       
+         <tr key={o._id}>
           <td className='p-2 border text-center'>{o.mess.name}</td>
           <td className='p-2 border text-center'>{o.order.mealType}</td>
           <td className='p-2 border text-center'>{o.order.items}</td>
@@ -91,7 +133,35 @@ const Orders = ({dBoy}) => {
           <td className='p-2 border text-center'>{o.order.user.name}</td>
           <td className='p-2 border text-center'>{o.order.user.address}</td>
           <td className='p-2 border text-center'>{o.order.user.phone}</td>
+
+          {status === "PENDING" && (
+            <td className='p-2  text-center flex flex-col gap-1 border-b border-r'>
+            <button className='rounded-2xl bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm font-bold px-2 py-1' onClick={() => {
+              handleApproveOrderRequest(o._id, o.order._id)
+            }}>Accept</button>
+            <button className='rounded-2xl bg-red-500 hover:bg-red-400 cursor-pointer text-white text-sm font-bold px-2 py-1' onClick={() => {
+              handleRejectOrderRequest(o._id, o.order._id)
+            }}>Reject</button>
+          </td>
+          )}
+
+          {status === "ACCEPTED" && o.order.status !== "COMPLETED" ? (
+            <td className='flex justify-center items-center p-2 border-b border-r'>
+              <button className='text-sm bg-green-500 hover:bg-green-400 font-bold text-white   px-2 py-1 cursor-pointer' onClick={() => {
+                setOpenCompleteOrderModal(true)
+                setOrderId(o.order._id)
+                setOrderStatus(o.order.status)
+              }}>Complete</button>
+            </td>
+          ) : (
+            <div className='flex justify-center items-center p-2 border-b border-r'>
+              <p>Completed</p>
+            </div>
+          )}
+         
         </tr>
+       
+       
         
       ))}
     </tbody>
@@ -100,6 +170,8 @@ const Orders = ({dBoy}) => {
   )}
  
  </div>
+
+ {openCompleteOrderModal && <CompleteOrderModal onCloseCompleteOrderModal={onCloseCompleteOrderModal} orderId={orderId}/>}
 
 
 

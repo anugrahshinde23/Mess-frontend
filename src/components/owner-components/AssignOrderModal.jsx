@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { checkDeliveryBoyPinMatchesUsersPinApi } from '../../services/deliveryBoyServices';
-import { assignOrderToDboy } from '../../services/order.services';
+import { assignOrderAsSelfPickApi, assignOrderToDboy } from '../../services/order.services';
 
-const AssignOrderModal = ({onClose, userPin, messId, orderId}) => {
+const AssignOrderModal = ({onClose, userPin, messId, orderId,handleGetOrders, handleGetDeliveryBoyByActiveOrder}) => {
 
 
     const [dBoys, setDboys] = useState([])
@@ -22,6 +22,7 @@ const AssignOrderModal = ({onClose, userPin, messId, orderId}) => {
             const res = await assignOrderToDboy({dBoyId, messId, orderId})
             console.log(res);
             handleCheckDboyPinMatchUserPin()
+            handleGetDeliveryBoyByActiveOrder(orderId)
             toast.success(res.message)
             
         } catch (error) {
@@ -47,6 +48,19 @@ const AssignOrderModal = ({onClose, userPin, messId, orderId}) => {
             toast.error(error.response?.data?.message)
         }
       } 
+
+      const handleAssignOrderAsSelfPick = async () => {
+        try {
+            const res = await assignOrderAsSelfPickApi(orderId)
+            console.log(res);
+            handleGetOrders()
+            toast.success(res.message)
+        } catch (error) {
+            toast.error(error.response?.data?.message)
+        } finally {
+            onClose()
+        }
+      }
 
      
       useEffect(() => {
@@ -82,8 +96,9 @@ const AssignOrderModal = ({onClose, userPin, messId, orderId}) => {
 
 
        {dBoys.length === 0 ? (
-        <div className='flex justify-center items-center h-full'>
+        <div className='flex flex-col justify-center items-center gap-3 h-full'>
             <p>No Delivery Boy found</p>
+            <button className='bg-indigo-500 hover:bg-indigo-400 cursor-pointer px-5 py-2 rounded-2xl text-sm text-white ' onClick={handleAssignOrderAsSelfPick} >Assign Order As Self-Pick</button>
         </div>
        ) : (
         <div className='mt-5'>

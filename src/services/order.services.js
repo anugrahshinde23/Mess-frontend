@@ -29,3 +29,18 @@ export const getOrderReqApi = async (dBoyId) => {
     const res = await api.get(`/order/get-order/${dBoyId}/request`)
     return res.data
 }
+
+export const getDboyByActiveOrderApi = async (orderId) => {
+    const res = await api.get(`/order/get/${orderId}/dBoy`)
+    return res.data
+}
+
+export const assignOrderAsSelfPickApi = async (orderId) => {
+    const res = await api.put(`/order/assign-as/${orderId}/self-pick`)
+    return res.data
+}
+
+export const completeOrderApi = async (data) => {
+    const res = await api.post('/order/complete-order', data)
+    return res.data
+}
