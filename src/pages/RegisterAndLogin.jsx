@@ -11,10 +11,9 @@ const RegisterAndLogin = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
-  const [pincode, setPincode] = useState("")
+  const [pincode, setPincode] = useState("");
   const [Loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  
 
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -30,36 +29,34 @@ const RegisterAndLogin = () => {
   const handleInputChanges = (e) => {};
 
   const handleLoginSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log("Login button clicked");
-    
 
     try {
-      setLoading(true)
+      setLoading(true);
 
-      const res = await loginApi({phone, password})
+      const res = await loginApi({ phone, password });
 
-      login(res.data, res.accessToken)
+      login(res.data, res.accessToken);
 
       console.log(res);
-      toast.success(res.message)
+      toast.success(res.message);
 
       setTimeout(() => {
-        if(res.data.role === "MESS_OWNER"){
-          navigate('/owner-dashboard')
-        }else if(res.data.role === "CUSTOMER") {
-          navigate('/customer-home')
-        }else if(res.data.role === "DELIVERY_BOY"){
-          navigate('/delivery-boy-dashboard')
+        if (res.data.role === "MESS_OWNER") {
+          navigate("/owner-dashboard");
+        } else if (res.data.role === "CUSTOMER") {
+          navigate("/customer-home");
+        } else if (res.data.role === "DELIVERY_BOY") {
+          navigate("/delivery-boy-dashboard");
         }
       }, 1500);
-      
     } catch (error) {
-      toast.error("Login Failed")
-    }finally{
-      setLoading(false)
+      toast.error("Login Failed");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
@@ -68,17 +65,22 @@ const RegisterAndLogin = () => {
     try {
       setLoading(true);
 
-      const res = await registerApi({ name, phone, password, address, pincode });
+      const res = await registerApi({
+        name,
+        phone,
+        password,
+        address,
+        pincode,
+      });
       console.log(res);
-      toast.success(res.message)
-      
+      toast.success(res.message);
+
       setTimeout(() => {
-        setIsLoginActive(true)
+        setIsLoginActive(true);
       }, 1500);
-      
     } catch (err) {
       // setError(err.response?.data?.message || "Registration failed");
-      toast.error(err.response?.data?.message || "Registration failed")
+      toast.error(err.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
     }
@@ -95,20 +97,25 @@ const RegisterAndLogin = () => {
             </div>
 
             <div className="border-2 border-white  px-5 py-0.5 sm:px-10 sm:py-1 mt-3 sm:mt-5 text-white cursor-pointer hover:bg-white hover:text-indigo-500">
-              <button className=" text-sm sm:text-[16px] cursor-pointer" onClick={handleLoginActive}>
+              <button
+                className=" text-sm sm:text-[16px] cursor-pointer"
+                onClick={handleLoginActive}
+              >
                 Register
               </button>
             </div>
           </div>
 
-
-
-
           <div className="w-full  sm:w-1/2 mt-15 sm:mt-0 sm:h-screen justify-center flex flex-col items-center gap-7 sm:gap-7 md:gap-7  ">
             <div>
-              <p className="font-bold text-3xl  sm:text-4xl md:text-5xl sm:mb-3 md:mb-5 ">Login</p>
+              <p className="font-bold text-3xl  sm:text-4xl md:text-5xl sm:mb-3 md:mb-5 ">
+                Login
+              </p>
             </div>
-            <form onSubmit={handleLoginSubmit} className="flex flex-col w-2/3  md:w-1/2 gap-5 sm:gap-7 md:gap-10 ">
+            <form
+              onSubmit={handleLoginSubmit}
+              className="flex flex-col w-2/3  md:w-1/2 gap-5 sm:gap-7 md:gap-10 "
+            >
               <input
                 type="text"
                 name="phone"
@@ -123,27 +130,32 @@ const RegisterAndLogin = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className=" rounded-2xl bg-zinc-300  px-3 py-2 sm:px-4 sm:py-3"
               />
+
+              <div>
+                <p className=" text-zinc-500 sm:text-[16px] text-sm">
+                  Forgot Password?
+                </p>
+              </div>
+
+              <div className="bg-indigo-500 flex justify-center w-2/3 md:w-1/2 rounded-2xl">
+                <button
+                  className=" px-3 py-2 sm:px-4 sm:py-3 text-white font-bold"
+                  type="submit"
+                >
+                  {Loading ? "Logging In..." : "Login"}
+                </button>
+              </div>
             </form>
-
-            <div>
-              <p className=" text-zinc-500 sm:text-[16px] text-sm">Forgot Password?</p>
-            </div>
-
-            <div className="bg-indigo-500 flex justify-center w-2/3 md:w-1/2 rounded-2xl">
-              <button className=" px-3 py-2 sm:px-4 sm:py-3 text-white font-bold" type="submit">{Loading ? "Logging In..." : "Login"}</button>
-            </div>
           </div>
         </div>
-      ) 
-      : 
-      (
-
+      ) : (
         <div className="flex flex-col-reverse sm:flex-row w-full h-full">
           <div className="w-full  sm:w-1/2 mt-15 sm:mt-0 sm:h-screen justify-center flex flex-col items-center gap-7 sm:gap-7 md:gap-7 ">
             <div>
-              <p className="font-bold text-3xl  sm:text-4xl md:text-5xl sm:mb-3 md:mb-5 ">Register</p>
+              <p className="font-bold text-3xl  sm:text-4xl md:text-5xl sm:mb-3 md:mb-5 ">
+                Register
+              </p>
               {error && <p className="text-red-500">{error}</p>}
-              
             </div>
             <div className="flex flex-col w-2/3  md:w-1/2 gap-5 sm:gap-7 md:gap-10  ">
               <input
@@ -195,18 +207,17 @@ const RegisterAndLogin = () => {
             </div>
           </div>
 
-
-
-
-
           <div className="sm:w-1/2 py-10  w-full bg-indigo-500 rounded-br-[200px] rounded-bl-[200px] sm:rounded-bl-[200px] sm:rounded-br-none sm:rounded-tl-[200px] flex flex-col items-center justify-center">
             <div className="text-white font-bold flex flex-col items-center gap-2 sm:gap-5">
               <p className="text-3xl sm:text-4xl md:text-5xl">Welcome Back!</p>
-              <p className="text-sm sm:text-[16px]" >Already have an account?</p>
+              <p className="text-sm sm:text-[16px]">Already have an account?</p>
             </div>
 
             <div className="border-2 border-white  px-5 py-0.5 sm:px-10 sm:py-1 mt-3 sm:mt-5 text-white cursor-pointer hover:bg-white hover:text-indigo-500">
-              <button className="text-sm sm:text-[16px] cursor-pointer" onClick={handleLoginActive}>
+              <button
+                className="text-sm sm:text-[16px] cursor-pointer"
+                onClick={handleLoginActive}
+              >
                 Login
               </button>
             </div>
