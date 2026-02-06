@@ -34,7 +34,7 @@ const DeliveryBoyDashboard = () => {
   
          console.log(res);
         
-         toast.success(res.message)
+        //  toast.success(res.message)
   
          logout()
          
