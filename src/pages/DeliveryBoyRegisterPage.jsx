@@ -31,7 +31,7 @@ const DeliveryBoyRegisterPage = () => {
     try {
       const res = await registerDeliveryBoyApi(servicePinCodes);
       console.log(res);
-      navigate("/delivery-boy-dashboard");
+      navigate('/delivery-boy-dashboard');
       toast.success(res.message);
       
     } catch (error) {

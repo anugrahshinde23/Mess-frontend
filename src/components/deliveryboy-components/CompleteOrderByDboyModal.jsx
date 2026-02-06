@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
-import {  completeOrderApi } from '../../services/order.services'
 import { toast } from 'react-toastify'
+import { completeOrderBydBoyApi } from '../../services/order.services'
 
-const CompleteOrderModal = ({onCloseCompleteOrderModal, orderId}) => {
+
+const CompleteOrderByDboyModal = ({onCloseCompleteOrderModal, orderId, dBoyId}) => {
 
   
     const [code, setCode] = useState("")
 
     const handleCompleteOrder = async () => {
 
-        if(!code || !orderId ){
-            alert("no code or orderid")
+        if(!code || !orderId || !dBoyId ){
+            alert("no code or orderid or dboyid")
         }
         try {
-            const res = await completeOrderApi({code, orderId})
+            const res = await completeOrderBydBoyApi({code, orderId, dBoyId})
             console.log(res);
             toast.success(res.message)
             
@@ -63,4 +64,4 @@ const CompleteOrderModal = ({onCloseCompleteOrderModal, orderId}) => {
   )
 }
 
-export default CompleteOrderModal
+export default CompleteOrderByDboyModal

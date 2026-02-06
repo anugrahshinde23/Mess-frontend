@@ -19,7 +19,7 @@ const NavBar = ({ logout }) => {
   const handleGetNotification = async () => {
     try {
       const res = await getNotifictaionApi();
-      console.log(res);
+      // console.log(res);
       setNotifications(res.notificationData);
       // toast.success(res.message);
     } catch (error) {

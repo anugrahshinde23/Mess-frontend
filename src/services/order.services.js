@@ -44,3 +44,18 @@ export const completeOrderApi = async (data) => {
     const res = await api.post('/order/complete-order', data)
     return res.data
 }
+
+export const completeOrderBydBoyApi = async (data) => {
+    const res = await api.post('/order/complete-order-dboy', data)
+    return res.data
+}
+
+export const getSubscriptionOrdersApi = async (dBoyId) => {
+    const res = await api.get(`/order/get-subscription/${dBoyId}/orders`)
+    return res.data
+}
+
+export const completeSubsOrderApi = async (data) => {
+    const res = await api.put('/order/complete-sub-order-dboy', data)
+    return res.data
+}

@@ -72,6 +72,7 @@ const Orders = ({ handleGetMessData, messData }) => {
       const res = await getDboyByActiveOrderApi(orderId.toString());
       // console.log(res);
       setDboyWidActiveOrder(res.dBoyData);
+      return res.dBoyData || null;
       // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message);
@@ -80,12 +81,13 @@ const Orders = ({ handleGetMessData, messData }) => {
   };
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       handleGetOrders();
-    }, 1000);
-
-    handleGetMessData();
+    }, 3000);
+  
+    return () => clearInterval(interval);
   }, []);
+  
 
   const messId = messData?.messData?._id;
 
@@ -238,11 +240,12 @@ const Orders = ({ handleGetMessData, messData }) => {
               <th className="border p-2">Items</th>
               <th className="border p-2">Order Date</th>
               <th className="border p-2">Status</th>
-              {order.filter((o) => o.source === "SUBSCRIPTION"  ).map((o) => o.source === "SUBSCRIPTION" ? (
-                <th key={o._id} className="border p-2">Source</th>
+              {order.some((o) => o.source === "SUBSCRIPTION") ? (
+                <th className="border p-2">Source</th>
               ) : (
-                <th key={o._id} className="border p-2">Payment</th>
-              ))}
+                <th className="border p-2">Payment</th>
+              )}
+
               <th className="border p-2">Shipping</th>
               <th className="border p-2">Destination</th>
             </tr>
@@ -274,7 +277,9 @@ const Orders = ({ handleGetMessData, messData }) => {
                     {o.status}
                   </td>
                   {o.source === "SUBSCRIPTION" ? (
-                    <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">{o.source}</td>
+                    <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
+                      {o.source}
+                    </td>
                   ) : (
                     <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
                       {o?.payment?.status}
@@ -293,18 +298,32 @@ const Orders = ({ handleGetMessData, messData }) => {
                         setOrderId(o._id);
                         setUserPin(o.user.pincode);
 
-                        await handleGetDeliveryBoyByActiveOrder(o._id);
+                        const dBoy = await handleGetDeliveryBoyByActiveOrder(
+                          o._id
+                        );
 
-                        if (dBoyWidActiveOrder) {
-                          setOpenAssignOrderModal(false);
-                          toast.info("Order already assigned");
-                        } else {
-                          setOpenAssignOrderModal(true);
+                        if (o.status === "COMPLETED") {
+                          toast.info("Order already completed");
+                          return;
                         }
+
+                        if (o.source === "SUBSCRIPTION") {
+                          toast.info("Subscription order auto assigned");
+                          return;
+                        }
+
+                        if (dBoy) {
+                          toast.info("Order already assigned");
+                          return;
+                        }
+
+                        setOpenAssignOrderModal(true);
                       }}
                     >
-                      {dBoyWidActiveOrder
+                      {dBoyWidActiveOrder || o.source === "SUBSCRIPTION"
                         ? "Order already assigned"
+                        : o.status === "COMPLETED"
+                        ? "Completed Order"
                         : "Assign Order"}
                     </span>
                   </td>
