@@ -41,9 +41,11 @@ const NavBar = ({ logout }) => {
   useEffect(() => {
     handleGetNotification();
 
-    setInterval(() => {
-      handleGetNotification()
+    const intervalId = setInterval(() => {
+      handleGetNotification();
     }, 1000);
+  
+    return () => clearInterval(intervalId);
   }, []);
 
   const { user } = useAuth();
