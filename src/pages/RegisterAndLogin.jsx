@@ -31,6 +31,8 @@ const RegisterAndLogin = () => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault()
+    console.log("Login button clicked");
+    
 
     try {
       setLoading(true)
@@ -106,7 +108,7 @@ const RegisterAndLogin = () => {
             <div>
               <p className="font-bold text-3xl  sm:text-4xl md:text-5xl sm:mb-3 md:mb-5 ">Login</p>
             </div>
-            <div className="flex flex-col w-2/3  md:w-1/2 gap-5 sm:gap-7 md:gap-10 ">
+            <form onSubmit={handleLoginSubmit} className="flex flex-col w-2/3  md:w-1/2 gap-5 sm:gap-7 md:gap-10 ">
               <input
                 type="text"
                 name="phone"
@@ -121,14 +123,14 @@ const RegisterAndLogin = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className=" rounded-2xl bg-zinc-300  px-3 py-2 sm:px-4 sm:py-3"
               />
-            </div>
+            </form>
 
             <div>
               <p className=" text-zinc-500 sm:text-[16px] text-sm">Forgot Password?</p>
             </div>
 
             <div className="bg-indigo-500 flex justify-center w-2/3 md:w-1/2 rounded-2xl">
-              <button className=" px-3 py-2 sm:px-4 sm:py-3 text-white font-bold" onClick={handleLoginSubmit}>{Loading ? "Logging In..." : "Login"}</button>
+              <button className=" px-3 py-2 sm:px-4 sm:py-3 text-white font-bold" type="submit">{Loading ? "Logging In..." : "Login"}</button>
             </div>
           </div>
         </div>
