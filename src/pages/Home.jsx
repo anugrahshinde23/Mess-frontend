@@ -5,6 +5,7 @@ import OurServices from '../components/home-components/OurServices'
 import HaveMess from '../components/home-components/HaveMess'
 import BecomeDeliveryBoy from '../components/home-components/BecomeDeliveryBoy'
 import OurTeam from '../components/home-components/OurTeam'
+import Footer from '../components/home-components/Footer'
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
      <HaveMess/>
     <BecomeDeliveryBoy/>
     <OurTeam/>
+    <Footer/>
     </>
   )
 }
