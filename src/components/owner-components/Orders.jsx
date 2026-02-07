@@ -240,11 +240,7 @@ const Orders = ({ handleGetMessData, messData }) => {
               <th className="border p-2">Items</th>
               <th className="border p-2">Order Date</th>
               <th className="border p-2">Status</th>
-              {order.some((o) => o.source === "SUBSCRIPTION") ? (
-                <th className="border p-2">Source</th>
-              ) : (
-                <th className="border p-2">Payment</th>
-              )}
+              <th className="border p-2">Source/Payment</th>
 
               <th className="border p-2">Shipping</th>
               <th className="border p-2">Destination</th>
