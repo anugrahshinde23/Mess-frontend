@@ -7,7 +7,7 @@ import tracking from '../../assests/images/tracking.png'
 const OurServices = () => {
   return (
     <>
-      <div className="sm:ml-15 my-20 flex flex-row sm:flex-col gap-10 mx-5 sm:gap-5 w-full sm:w-1/2">
+      <div className="sm:ml-15 my-20 flex flex-row sm:flex-col overflow-x-hidden gap-10 mx-5 sm:gap-5 w-full sm:w-1/2">
         <p className="text-indigo-500 text-3xl sm:text-5xl font-bold ">Our Services</p>
         <p className="text-zinc-500 text-sm font-medium">
           Mess Mate is a multi-mess website offers a comprehensive suite of
@@ -17,7 +17,7 @@ const OurServices = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:mx-15  mb-15">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-center lg:mx-15  mb-15">
         <div className="shadow-indigo-500 shadow-2xl  flex flex-col gap-4 w-80 p-6 rounded-2xl bg-white 
       transition-all duration-300 ease-out
       hover:-translate-y-3 hover:scale-105

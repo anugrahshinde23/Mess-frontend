@@ -9,17 +9,17 @@ const OurTeam = () => {
   return (
     <>
       <div className="mx-15 h-screen flex flex-col justify-center ">
-        <div className=" gap-15 flex justify-between items-center">
-          <div className=" bg-indigo-500 rounded-full h-80 w-80">
-            <img src={anugrah2} alt="Anugrah" className="   bottom-5  h-full w-full rounded-full object-contain" />
+        <div className=" gap-15 flex flex-col sm:flex-row mt-50 sm:mt-0  justify-between items-center">
+          <div className=" bg-indigo-500 rounded-full h-40 w-40 sm:h-80 sm:w-80">
+            <img src={anugrah2} alt="Anugrah" className=" h-full w-full rounded-full object-contain" />
           </div>
 
           <div className="flex flex-col items-center justify-center gap-10">
             <div className="flex flex-col items-center justify-center ">
-              <p className="text-5xl font-bold">We've Been There</p>
-              <p className="text-5xl font-bold">Done That</p>
+              <p className="text-4xl sm:text-5xl font-bold">We've Been There</p>
+              <p className=" text-4xl sm:text-5xl font-bold">Done That</p>
             </div>
-            <div className="text-gray-500 font-semibold text-center">
+            <div className="text-gray-500 font-semibold text-sm sm:text-lg text-center">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 <br />
@@ -36,11 +36,11 @@ const OurTeam = () => {
               </p>
             </div>
           </div>
-          <div className="bg-indigo-500  rounded-full h-80 w-80">
+          <div className="bg-indigo-500  rounded-full h-40 w-40 sm:h-80 sm:w-80">
             <img src={elonmusk} alt="Elon Musk" className="   bottom-5  h-full w-full rounded-full object-contain" />
           </div>
         </div>
-        <div className="flex justify-between  items-end mx-12 my-10 ">
+        <div className="hidden sm:flex sm:justify-between   items-end mx-12 my-10 ">
           <div className=" flex flex-col items-center gap-5 ">
             <p className="text-3xl font-semibold">Anugrah Shinde</p>
             <div className="flex gap-3">
