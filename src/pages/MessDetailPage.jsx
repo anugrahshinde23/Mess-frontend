@@ -108,7 +108,7 @@ const MessDetailPage = () => {
     <>
       <Navbar />
 
-      <div className="mx-15 flex flex-col gap-5 ">
+      <div className="mx-15 mb-10 flex flex-col gap-5 ">
         <div className="p-10 border mt-5">
           <div className="flex flex-col gap-2">
             <p className="text-4xl font-semibold">{mess?.messData?.name}</p>
@@ -147,7 +147,7 @@ const MessDetailPage = () => {
             <p className="text-4xl font-semibold">Plans</p>
           </div>
           {plans ? (
-            <div className="grid grid-cols-4 mt-5 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-5 gap-5">
               {plans?.plansData?.map((p) => (
                 <div key={p?.plan?._id} className="border p-5">
                   <p className="text-2xl font-bold">{p?.plan?.type}</p>
