@@ -76,7 +76,7 @@ const PlaceOrderModal = ({onClose, messId, oneTimePrice}) => {
       <div className="absolute inset-0 bg-black opacity-25  " ></div>
 
       {/* Modal content */}
-      <div className="relative bg-white w-1/4 p-10 rounded-cl shadow-lg border border-indigo-500">
+      <div className="relative bg-white w-2/3 sm:w-1/4 p-10 rounded-cl shadow-lg border border-indigo-500">
         <div className="flex justify-between">
           <p className="text-3xl font-bold text-indigo-500">Place Order</p>
           <p
