@@ -79,7 +79,7 @@ const handleRejectRequest = async (reqId) => {
     <div className='p-10'>
         <p className='text-3xl text-indigo-500 font-bold'>Delivery Boy</p>
 
-        <div className='p-5 border border-indigo-500 mt-10 flex items-center justify-between px-20'>
+        <div className='p-5 border border-indigo-500 mt-10 flex items-center overflow-x-auto sm:overflow-visible whitespace-nowrap scroll-smooth no-scrollbar   justify-between sm:px-20'>
             {dBoyStatus.map((d) => (
                 <div key={d.id} className={`cursor-pointer px-4 py-2 rounded-lg text-sm ${dBoyTab === d.id ? "bg-indigo-500 text-white font-bold" : "text-gray-600 hover:bg-gray-200"}`} onClick={() => {
                     setDboyTab(d.id)
