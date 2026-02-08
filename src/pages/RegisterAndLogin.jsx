@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { loginApi, registerApi } from "../services/auth.services";
 import { toast } from "react-toastify";
+import * as MaterialDesignIcons from 'react-icons/md'
 
 const RegisterAndLogin = () => {
   const [isLoginActive, setIsLoginActive] = useState(false);
@@ -14,6 +15,15 @@ const RegisterAndLogin = () => {
   const [pincode, setPincode] = useState("");
   const [Loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [passVisibility, setPassVisibility] = useState(false)
+
+  const handleTogglePassVisibility = () => {
+    if(passVisibility === true){
+      setPassVisibility(false)
+    }else {
+      setPassVisibility(true)
+    }
+  }
 
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -123,13 +133,27 @@ const RegisterAndLogin = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 className=" rounded-2xl bg-zinc-300 px-3 py-2 sm:px-4 sm:py-3"
               />
+              <div className="">
               <input
-                type="text"
+                type= {passVisibility  === true ? "password" : "text" }
                 name="password"
                 placeholder="Enter Password"
                 onChange={(e) => setPassword(e.target.value)}
-                className=" rounded-2xl bg-zinc-300  px-3 py-2 sm:px-4 sm:py-3"
+                className=" relative rounded-2xl bg-zinc-300  px-3 py-2 w-full sm:px-4 sm:py-3"
               />
+
+
+
+              {passVisibility === true ? (
+                <MaterialDesignIcons.MdVisibility size={20} className="absolute right-55 top-99 cursor-pointer" onClick={handleTogglePassVisibility}/>
+              ) : (
+
+                <MaterialDesignIcons.MdVisibilityOff size={20} className="absolute right-55 top-99 cursor-pointer" onClick={handleTogglePassVisibility}/>
+              )}
+              
+              </div>
+
+            
 
               <div>
                 <p className=" text-zinc-500 sm:text-[16px] text-sm">
@@ -173,7 +197,7 @@ const RegisterAndLogin = () => {
                 className=" rounded-2xl bg-zinc-300 px-3 py-2 sm:px-4 sm:py-3"
               />
               <input
-                type="text"
+                type="password"
                 name="password"
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter Password"

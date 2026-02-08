@@ -10,7 +10,7 @@ const HeroSection = ({activeTab, messData, handleGetMessData, showUpdateModal, s
   return (
     <>
     
-    <div className='bg-zinc-200 max-w-full sm:w-full  my-4 mx-4 sm:mx-4 sm:my-0 rounded-2xl' >
+    <div className='bg-zinc-200 max-w-full sm:w-full overflow-auto my-4 mx-4 sm:mx-4 sm:my-0 rounded-2xl' >
         {activeTab === 'tab1' && <p>Dashboard</p>}
         {activeTab === 'tab2' && <Shop messData={messData} handleGetMessData={handleGetMessData} showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} />}
         {activeTab === 'tab3' && <Orders handleGetMessData={handleGetMessData} messData={messData}/>}

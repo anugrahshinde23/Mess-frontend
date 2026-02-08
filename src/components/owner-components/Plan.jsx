@@ -81,7 +81,7 @@ const Plan = ({ messData, handleGetMessData }) => {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-10 p-20 h-full ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 p-20 h-full ">
         {plans?.plansData.map((plan) => (
           <div key={plan._id} className="border border-zinc-400 p-10">
             

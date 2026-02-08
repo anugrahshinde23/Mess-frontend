@@ -124,7 +124,7 @@ const Orders = ({ handleGetMessData, messData }) => {
     <div className="p-10 ">
       <p className="text-3xl font-bold text-indigo-500 mb-5">Subscriptions</p>
 
-      <div className="flex gap-3 border  border-indigo-500 rounded-2xl p-3 justify-between">
+      <div className="flex gap-3 border  border-indigo-500 rounded-2xl p-3 overflow-x-auto am:overflow-visible whitespace-nowrap scroll-smooth no-scrollbar  justify-between">
         {statusTab.map((s) => (
           <p
             key={s.id}
@@ -162,7 +162,7 @@ const Orders = ({ handleGetMessData, messData }) => {
           </p>
         </div>
       ) : (
-        <table className="w-full border mt-5">
+        <table className="w-full border mt-5 ">
           <thead>
             <tr>
               <th className="border p-2">Name</th>
@@ -215,7 +215,7 @@ const Orders = ({ handleGetMessData, messData }) => {
         <div>
           <p className="text-3xl font-bold text-indigo-500  mt-10">Orders</p>
         </div>
-        <div className="border border-indigo-500 px-20 py-5  flex justify-between mt-5 cursor-pointer">
+        <div className="border border-indigo-500 px-20 py-5  overflow-x-auto am:overflow-visible whitespace-nowrap scroll-smooth no-scrollbar  flex justify-between mt-5 cursor-pointer">
           {orderTabs.map((o) => (
             <div
               key={o.id}
