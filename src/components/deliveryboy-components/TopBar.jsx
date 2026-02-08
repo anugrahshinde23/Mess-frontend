@@ -4,7 +4,7 @@ import Messes from './Messes'
 import Orders from './Orders'
 import Settings from './Settings'
 
-const TopBar = ({dBoy}) => {
+const TopBar = ({dBoy, logout}) => {
 
   const [activeTab, setActivetTab] = useState("tab1")
 
@@ -21,7 +21,7 @@ const TopBar = ({dBoy}) => {
     <>
     
     <div className='p-5 border rounded-2xl border-indigo-500 mt-10 
-     mx-26 flex justify-between items-center px-10'>
+     mx-15 sm:mx-26 flex justify-between items-center px-5 sm:px-10 overflow-x-auto sm:overflow-visible whitespace-nowrap scroll-smooth no-scrollbar '>
         {dBoyTab.map((d)=>(
             <div key={d.id} onClick={() => {
               setActivetTab(d.id)
@@ -32,11 +32,11 @@ const TopBar = ({dBoy}) => {
             </div>
         ))}
     </div>
-    <div className='h-150 mx-26 my-10 rounded-2xl overflow-auto border border-indigo-500'>
+    <div className='h-150 mx-15 sm:mx-26 my-10 rounded-2xl overflow-auto border border-indigo-500'>
       {activeTab === "tab1" && <Dashboard/>}
       {activeTab === "tab2" && <Messes dBoy={dBoy}/>}
       {activeTab === "tab3" && <Orders dBoy={dBoy}/>}
-      {activeTab === "tab4" && <Settings/>}
+      {activeTab === "tab4" && <Settings logout={logout} />}
     </div>
     </>
   )

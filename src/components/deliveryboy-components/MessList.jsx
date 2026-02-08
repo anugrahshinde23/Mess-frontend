@@ -36,10 +36,10 @@ const MessList = () => {
     <>
     
       <div>
-        <p className="text-3xl font-semibold text-indigo-500 mx-26 mt-10">Messes Near You</p>
+        <p className="text-3xl font-semibold text-indigo-500 mx-15 sm:mx-26 mt-10">Messes Near You</p>
       </div>
 
-      <div className="grid grid-cols-3 gap-10  mt-10 mx-26">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-10  mt-10 mx-26">
         {messes.map((m) => (
           <div className="bg-indigo-200 p-10 rounded-2xl" key={m._id}>
             <div className="flex justify-between items-center ">

@@ -58,7 +58,7 @@ const DeliveryBoyDashboard = () => {
     <>
        <NavBar logout={handleLogout} />
        <MessList dBoy={dBoy}/>
-       <TopBar dBoy={dBoy}/>
+       <TopBar dBoy={dBoy} logout={logout}/>
        
     </>
   )

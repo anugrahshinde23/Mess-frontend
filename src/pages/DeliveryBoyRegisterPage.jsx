@@ -57,7 +57,7 @@ const DeliveryBoyRegisterPage = () => {
             </p>
           </div>
 
-          <div className="flex flex-col  mx-50 gap-5 mt-15 p-10">
+          <div className="flex flex-col  sm:mx-50 gap-5 mt-15 p-10">
             <input
               type="text"
               placeholder="Enter service pincode"

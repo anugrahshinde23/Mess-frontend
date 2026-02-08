@@ -8,7 +8,7 @@ import {
 } from "../../services/notification.services";
 import { toast } from "react-toastify";
 
-const NavBar = ({ logout }) => {
+const NavBar = ( ) => {
   const [openNotifyModal, setOpenNotifyModal] = useState(false);
   const [notification, setNotifications] = useState([]);
 
@@ -52,7 +52,7 @@ const NavBar = ({ logout }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center px-26 py-10  shadow-2xl">
+      <div className="flex justify-between items-center px-15 sm:px-26 py-10  shadow-2xl">
         <div>
           <p className="text-2xl font-medium text-indigo-500">MessMate</p>
         </div>
@@ -91,14 +91,7 @@ const NavBar = ({ logout }) => {
             <p className="text-sm font-bold">{user.name}</p>
             <p className="text-sm font-bold">{user.phone}</p>
           </div>
-          <div>
-            <button
-              className="bg-red-500 text-white font-bold p-2 rounded-full cursor-pointer hover:bg-red-400"
-              onClick={logout}
-            >
-              Logout
-            </button>
-          </div>
+          
         </div>
       </div>
     </>

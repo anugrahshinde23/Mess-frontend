@@ -41,8 +41,8 @@ const Payment = () => {
             <p className="text-3xl text-indigo-500 font-semibold">MessMate</p>
           </div>
         </div>
-        <div className="flex flex-1 w-full py-25 ">
-          <div className="border-r-3 border-gray-300 w-1/2 px-20 py-10   ">
+        <div className="flex flex-col gap-15 sm:gap-0  sm:flex-row sm:flex-1 w-full py-25 ">
+          <div className="border-r-3 border-gray-300 w-full sm:w-1/2 px-20 py-10   ">
             <div className=" w-full h-full flex flex-col justify-center gap-7 ">
               <p className="text-3xl font-bold">Payment details</p>
               <div className="flex justify-between">
@@ -59,7 +59,7 @@ const Payment = () => {
             </div>
           </div>
 
-          <div className=" w-1/2 px-20">
+          <div className=" w-full sm:w-1/2 px-20">
           <div className="flex flex-col  gap-10">
             <input type="text" className="border relative border-gray-300  px-5 py-4 rounded-2xl" value={user.name}/>
             <input type="text" className="border  border-gray-300 px-5 py-4 rounded-2xl" value={orderId}/>

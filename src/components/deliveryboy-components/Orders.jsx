@@ -119,7 +119,7 @@ const Orders = ({dBoy}) => {
   return (
     <>
     <p className='text-2xl font-bold text-indigo-500 m-10'>Normal Orders</p>
-    <div className=' m-5 px-10 py-5 rounded-2xl flex  justify-between items-center'>
+    <div className=' m-5 px-5 sm:px-10 py-5 rounded-2xl flex  justify-between items-center'>
       
       {orderReqStatus.map((o) => (
         <div key={o.id} className={`${status === o.id ? "bg-indigo-500 p-2 text-white font-bold rounded-2xl text-sm cursor-pointer" : "hover:bg-zinc-300 text-sm p-2 rounded-2xl cursor-pointer"}`}  onClick={() => {
