@@ -11,7 +11,7 @@ const NotificationModal = ({closeNotifyModal, notifications, handleMarkAsRead}) 
       ></div>
 
       {/* Modal */}
-      <div className="relative bg-white w-1/4 mr-45 h-2/3 mt-20 p-8 rounded-xl shadow-lg">
+      <div className="relative bg-white w-2/3 sm:w-1/4 mr-25 sm:mr-45 h-2/3 mt-20 p-8 rounded-xl shadow-lg">
         <div className="flex justify-between  items-center mb-6">
           <p className="text-2xl font-bold text-indigo-500">Notifications </p>
           <button

@@ -33,7 +33,7 @@ const navigate = useNavigate()
 
   return (
     <>
-      <div className="grid grid-cols-4 m-15 gap-15">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 m-15 gap-15">
         {allMesses?.messData.map((items) => (
           <div className="border border-zinc-400 rounded-4xl p-5" key={items._id}>
             <div className="flex justify-between">

@@ -4,12 +4,25 @@ import UserProfileModal from './UserProfileModal'
 import NotificationModal from './NotificationModal'
 import { getNotifictaionApi, markAsReadApi } from '../../services/notification.services'
 import { toast } from 'react-toastify'
+import MenuBarModal from './MenuBarModal'
 
 
 const Navbar = ({handleLogout}) => {
 
   const [notifyModal, setNotifyModal] = useState(false)
   const [notifications, setNotifications] = useState([])
+  const [MenuOpen, setMenuOpen] = useState(false)
+
+
+  const menu = [
+    "Home",
+    "Contact Us",
+    "Messes"
+  ]
+
+  const closeMenuModal = () => {
+    setMenuOpen(false)
+  }
 
 
   const closeNotifyModal = () => {
@@ -63,15 +76,15 @@ const Navbar = ({handleLogout}) => {
     <>
     
     
-    <div className='flex justify-between px-15 py-10  border-b border-indigo-500 mx-15 items-center'>
+    <div className='flex justify-between px-1 sm:px-15 py-5 sm:py-10  border-b border-indigo-500 mx-15 items-center'>
         <div>
             <p className='text-2xl font-bold text-indigo-500 '>MessMate</p>
         </div>
 
-        <div className='flex gap-20 text-sm font-bold'>
-            <p>Home</p>
-            <p>Contact Us</p>
-            <p>Messes</p>
+        <div className='hidden sm:flex gap-20 text-sm font-bold'>
+            {menu.map((m) => (
+              <p>{m}</p>
+            ))}
         </div>
 
         <div className='flex gap-2 items-center'>
@@ -88,11 +101,18 @@ const Navbar = ({handleLogout}) => {
 )}
          </div>
             <MaterialDesignIcons.MdPersonOutline className='cursor-pointer' onClick={handleProfileIsActive} size={30}/>
+            <MaterialDesignIcons.MdOutlineMenu className='cursor-pointer sm:hidden' onClick={() => {
+              setMenuOpen(true)
+            }} size={30}/>
 
             {isActive && <UserProfileModal onClose={onClose} handleLogout={handleLogout} />}
             {notifyModal && <NotificationModal handleMarkAsRead={handleMarkAsRead} notifications={notifications} closeNotifyModal={closeNotifyModal}/>}
+            {MenuOpen && <MenuBarModal closeMenuModal={closeMenuModal} menuArr={menu}/>}
         </div>
+        
     </div>
+
+   
     
     </>
   )

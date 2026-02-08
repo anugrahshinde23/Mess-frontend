@@ -83,7 +83,7 @@ const UserProfileModal = ({ onClose, handleLogout }) => {
         onClick={onClose}
       ></div>
 
-      <div className="relative bg-white w-1/4 p-10 rounded-tl-xl rounded-bl-xl shadow-lg border border-indigo-500">
+      <div className="relative bg-white w-2/3 sm:w-1/4 p-10 rounded-tl-xl rounded-bl-xl shadow-lg border border-indigo-500">
         <div className="flex justify-between">
           <p className="text-3xl font-bold text-indigo-500">Profile</p>
           <p className="cursor-pointer font-bold" onClick={onClose}>
