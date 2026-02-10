@@ -156,7 +156,9 @@ const RegisterAndLogin = () => {
             
 
               <div>
-                <p className=" text-zinc-500 sm:text-[16px] text-sm">
+                <p className=" text-zinc-500 sm:text-[16px] text-sm cursor-pointer" onClick={() => {
+                  navigate('/reset-password')
+                }}>
                   Forgot Password?
                 </p>
               </div>

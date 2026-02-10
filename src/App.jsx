@@ -14,6 +14,7 @@ import Payment from "./pages/Payment";
 import PaymentHistoryPageCustomer from "./pages/PaymentHistoryPageCustomer";
 import DeliveryBoyDashboard from "./pages/DeliveryBoyDashboard";
 import DeliveryBoyRegisterPage from "./pages/DeliveryBoyRegisterPage";
+import ResetPassword from "./pages/ResetPassword";
 
 
 const App = () => {
@@ -84,6 +85,10 @@ const App = () => {
           <RoleProtectedRoutes allowedRoles={["DELIVERY_BOY"]}>
             <DeliveryBoyDashboard/>
           </RoleProtectedRoutes>
+        } />
+
+        <Route path="/reset-password" element={
+          <ResetPassword/>
         } />
       </Routes>
     </>
