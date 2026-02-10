@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import SendOTP from './SendOTP.JSX'
+
 import VerifyOTP from './VerifyOTP'
 import ResetPassword from './ResetPassword'
 import ResetDone from './ResetDone'
+import sendOTP from './sendOTP'
+
 
 const HeroSection = () => {
 
@@ -13,7 +15,7 @@ const HeroSection = () => {
     <>
     
     <div className=' h-screen flex flex-col justify-center items-center'>
-        {tab === "tab1" && <SendOTP  setTab={setTab} setPhoneNumber={setPhoneNumber}/>}
+        {tab === "tab1" && <sendOTP setTab={setTab} setPhoneNumber={setPhoneNumber}/>}
         {tab === "tab2" && <VerifyOTP phoneNumber={phoneNumber} setTab={setTab}/>}
         {tab === "tab3" && <ResetPassword phoneNumber={phoneNumber} setTab={setTab}/>}
         {tab === "tab4" && <ResetDone />}
