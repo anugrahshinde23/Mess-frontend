@@ -59,14 +59,14 @@ const ResetPassword = ({phoneNumber, setTab}) => {
 
     </div>
     <div className='flex flex-col gap-5 mt-10'>
-      <input type={show === true ? "password" : "text"} placeholder='New password' className=' border-b outline-0 pb-2'/>
-      <input type={show === true ? "password" : "text"} placeholder='Confirm password' className=' border-b outline-0 pb-2'/>
+      <input type={show === true ? "password" : "text"} placeholder='New password' className=' border-b outline-0 pb-2' onChange={(e) => setPass(e.target.value)}/>
+      <input type={show === true ? "password" : "text"} placeholder='Confirm password' className=' border-b outline-0 pb-2' onChange={(e) => setCpass(e.target.value)}/>
       <div className='flex justify-end'>
         <p className='text-sm font-bold cursor-pointer' onClick={() => {
           handleShowPass()
         }}>{show  === true ? "Show" : "Hide"}</p>
       </div>
-      <button className='text-sm mt-50 font-bold text-white bg-indigo-500 hover:bg-indigo-400 px-5 py-2 rounded-2xl cursor-pointer'>
+      <button className='text-sm mt-50 font-bold text-white bg-indigo-500 hover:bg-indigo-400 px-5 py-2 rounded-2xl cursor-pointer' onClick={handleResetPassword}>
       {loading ? "Reseting..." : "Reset Password"}
     </button>
     </div>
