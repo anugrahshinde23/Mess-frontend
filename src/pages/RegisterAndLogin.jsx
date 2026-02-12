@@ -59,6 +59,8 @@ const RegisterAndLogin = () => {
           navigate("/customer-home");
         } else if (res.data.role === "DELIVERY_BOY") {
           navigate("/delivery-boy-dashboard");
+        } else if (res.data.role === "ADMIN") {
+          navigate("/admin-dashboard")
         }
       }, 1500);
     } catch (error) {

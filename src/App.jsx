@@ -15,6 +15,7 @@ import PaymentHistoryPageCustomer from "./pages/PaymentHistoryPageCustomer";
 import DeliveryBoyDashboard from "./pages/DeliveryBoyDashboard";
 import DeliveryBoyRegisterPage from "./pages/DeliveryBoyRegisterPage";
 import ResetPassword from "./pages/ResetPassword";
+import AdminDashboard from "./pages/AdminDashboard";
 
 
 const App = () => {
@@ -90,6 +91,12 @@ const App = () => {
         <Route path="/reset-password" element={
           <ResetPassword/>
         } />
+
+        <Route path="/admin-dashboard" element={
+          <RoleProtectedRoutes allowedRoles={["ADMIN"]}>
+            <AdminDashboard/>
+          </RoleProtectedRoutes>
+        }/>
       </Routes>
     </>
   );
