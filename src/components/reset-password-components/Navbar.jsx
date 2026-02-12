@@ -5,7 +5,7 @@ const Navbar = () => {
     <>
     
     <div >
-        <p className='text-3xl font-bold text-indigo-500 mx-26 my-10'>MessMate</p>
+        <p className='text-3xl font-bold text-indigo-500 mx-10 sm:mx-26 my-5 sm:my-10'>MessMate</p>
     </div>
     
     </>

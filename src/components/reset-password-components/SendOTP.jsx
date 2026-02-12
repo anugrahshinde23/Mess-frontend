@@ -34,7 +34,7 @@ const SendOTP = ({setTab, setPhoneNumber}) => {
 
   return (
     <>
-      <div className="flex flex-col gap-10 w-1/6">
+      <div className="flex flex-col gap-10 w-1/2 sm:w-1/6">
         <div className=" flex flex-col items-center  gap-5">
         <div className="bg-indigo-500 p-2   rounded-2xl w-fit">
           <MaterialDesignIcons.MdFingerprint color="white" size={30} />

@@ -9,7 +9,7 @@ import SendOTP from './SendOTP'
 
 const HeroSection = () => {
 
- const [tab, setTab] = useState("tab1")
+ const [tab, setTab] = useState("tab4")
  const [phoneNumber, setPhoneNumber] = useState("")
 
   return (
