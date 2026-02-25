@@ -18,7 +18,7 @@ const Navbar = () => {
     
      <div className='flex justify-between items-center  px-10 py-5 sm:py-7 sm:px-20 '>
         <div className=''>
-            <p className='lg:text-2xl  text-xl font-bold text-indigo-500 ' >MessMate</p>
+            <p className='lg:text-2xl  text-xl font-bold text-indigo-500 animate__animated animate__rubberBand' >MessMate</p>
         </div>
 
         <div className='border hidden md:block border-indigo-500 md:px-5 md:py-1 lg:px-10 lg:py-3 rounded-full hover:bg-indigo-500 hover:text-white hover:border-white' >
