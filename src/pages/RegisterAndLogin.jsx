@@ -170,7 +170,9 @@ const RegisterAndLogin = () => {
                   className=" px-3 py-2 sm:px-4 sm:py-3 text-white font-bold"
                   type="submit"
                 >
-                  {Loading ? "Logging In..." : "Login"}
+                  {Loading ? <svg className="animate-spin size-5 text-blue-500" viewBox="0 0 24 24">
+  {/* ... */}
+</svg> : "Login"}
                 </button>
               </div>
             </form>
