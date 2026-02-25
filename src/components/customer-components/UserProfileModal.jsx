@@ -116,14 +116,31 @@ const UserProfileModal = ({ onClose, handleLogout }) => {
               <p>End: {formatDate(currentSubscription.endDate)}</p>
 
               {timeLeft ? (
-                <p className="text-green-600 font-bold mt-2">
-                  ⏳{" "}
+                <div className=" flex flex-col gap-3 font-bold mt-2">
+                  {" "}
                   {currentSubscription.status === "PENDING"
                     ? "Starts in"
-                    : "Ends in"}{" "}
-                  {timeLeft.days}d {timeLeft.hours}h{" "}
-                  {timeLeft.minutes}m {timeLeft.seconds}s
-                </p>
+                    : <p className="text-lg">Ends In</p>}
+                    {" "}
+                  <div className="grid grid-cols-4 gap-2 text-center">
+                  <div className="bg-indigo-500 p-2 text-white">
+                  {timeLeft.days}
+                  <p>Days</p>
+                    </div> 
+                    <div className="bg-indigo-500 p-2 text-white">
+                    {timeLeft.hours}
+                    <p>Hour</p>
+                      </div>{" "}
+                  <div className="bg-indigo-500 p-2 text-white">
+                  {timeLeft.minutes}
+                  <p>Min</p>
+                    </div> 
+                    <div className="bg-indigo-500 p-2 text-white">
+                    {timeLeft.seconds}
+                    <p>Sec</p>
+                    </div>
+                </div>
+                  </div>
               ) : (
                 <p className="text-red-500 font-bold">
                   ❌ Subscription expired

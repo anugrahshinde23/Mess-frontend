@@ -97,7 +97,7 @@ const Orders = ({ handleGetMessData, messData }) => {
     try {
       const res = await getSubscriptionByStatusApi(status);
       console.log(res);
-
+     
       setSubscriptions(res.subsData);
     } catch (err) {
       toast.error("Failed to fetch subscriptions");
@@ -124,7 +124,7 @@ const Orders = ({ handleGetMessData, messData }) => {
     <div className="p-10 ">
       <p className="text-3xl font-bold text-indigo-500 mb-5">Subscriptions</p>
 
-      <div className="flex gap-3 border  border-indigo-500 rounded-2xl p-3 overflow-x-auto sm:overflow-visible whitespace-nowrap scroll-smooth no-scrollbar  justify-between">
+      <div className="flex gap-3 bg-indigo-200  shadow-sm rounded-2xl p-3 overflow-x-auto sm:overflow-visible whitespace-nowrap scroll-smooth no-scrollbar  justify-between">
         {statusTab.map((s) => (
           <p
             key={s.id}
@@ -142,7 +142,7 @@ const Orders = ({ handleGetMessData, messData }) => {
       </div>
 
       {subscriptions.length === 0 ? (
-        <div className="flex justify-center items-center text-2xl font-bold ">
+        <div className="flex flex-col justify-center  items-center text-2xl font-bold ">
           <p
             className={`${
               activeTab === "ACTIVE"
@@ -162,35 +162,35 @@ const Orders = ({ handleGetMessData, messData }) => {
           </p>
         </div>
       ) : (
-        <table className="w-full border mt-5 ">
+        <table className="w-full border-collapse shadow-sm  divide-y divide-gray-200 mt-5 ">
           <thead>
             <tr>
-              <th className="border p-2">Name</th>
-              <th className="border p-2">Phone</th>
-              <th className="border p-2">Plan</th>
-              <th className="border p-2">Start</th>
-              <th className="border p-2">End</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Name</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Phone</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Plan</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Start</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">End</th>
               {activeTab === "PENDING" && (
-                <th className="border p-2">Action</th>
+                <th className="px-6 py-3 bg-indigo-500 text-center text-xs font-bold text-white uppercase tracking-wider">Action</th>
               )}
             </tr>
           </thead>
 
           <tbody>
             {subscriptions.map((s) => (
-              <tr key={s._id}>
-                <td className="border p-2">{s.user.name}</td>
-                <td className="border p-2">{s.user.phone}</td>
-                <td className="border p-2">{s.plan.type}</td>
-                <td className="border p-2">
+              <tr key={s._id} className="hover:bg-gray-50, transition-colors ">
+                <td className="px-6 py-4 bg-white text-center whitespace-nowrap text-sm text-gray-900">{s.user.name}</td>
+                <td className="px-6 py-4 bg-white text-center whitespace-nowrap text-sm text-gray-900">{s.user.phone}</td>
+                <td className="px-6 py-4 bg-white text-center whitespace-nowrap text-sm text-gray-900">{s.plan.type}</td>
+                <td className="px-6 py-4 bg-white text-center whitespace-nowrap text-sm text-gray-900">
                   {s.startDate ? new Date(s.startDate).toDateString() : "-"}
                 </td>
-                <td className="border p-2">
+                <td className="px-6 py-4 bg-white text-center whitespace-nowrap text-sm text-gray-900">
                   {s.endDate ? new Date(s.endDate).toDateString() : "-"}
                 </td>
 
                 {activeTab === "PENDING" && (
-                  <td className="border p-2 flex gap-2">
+                  <td className="px-6 py-4 bg-white text-center whitespace-nowrap text-sm text-gray-900 flex gap-2">
                     <button
                       onClick={() => handleApprove(s._id)}
                       className="bg-green-500 text-white px-2 py-1 rounded"
@@ -215,7 +215,7 @@ const Orders = ({ handleGetMessData, messData }) => {
         <div>
           <p className="text-3xl font-bold text-indigo-500  mt-10">Orders</p>
         </div>
-        <div className="border border-indigo-500 px-20 py-5  overflow-x-auto sm:overflow-visible whitespace-nowrap scroll-smooth no-scrollbar  flex justify-between mt-5 cursor-pointer">
+        <div className=" bg-indigo-200 rounded-2xl shadow-sm p-3 overflow-x-auto sm:overflow-visible whitespace-nowrap scroll-smooth no-scrollbar  flex justify-between mt-5 cursor-pointer">
           {orderTabs.map((o) => (
             <div
               key={o.id}
@@ -232,18 +232,18 @@ const Orders = ({ handleGetMessData, messData }) => {
             </div>
           ))}
         </div>
-        <table className="w-full mt-5 ">
+        <table className="w-full border-collapse shadow-sm  divide-y divide-gray-200 mt-5">
           <thead>
             <tr>
-              <th className="border p-2">Name</th>
-              <th className="border p-2">Meal Type</th>
-              <th className="border p-2">Items</th>
-              <th className="border p-2">Order Date</th>
-              <th className="border p-2">Status</th>
-              <th className="border p-2">Source/Payment</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Name</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Meal Type</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Items</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Order Date</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Source/Payment</th>
 
-              <th className="border p-2">Shipping</th>
-              <th className="border p-2">Destination</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Shipping</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Destination</th>
             </tr>
           </thead>
           <tbody>
@@ -252,39 +252,39 @@ const Orders = ({ handleGetMessData, messData }) => {
               .map((o) => (
                 <tr
                   key={o._id}
-                  className=" group relative transition-all duration-300 border-b
+                  className=" group relative transition-all duration-300 
             cursor-pointer"
                 >
-                  <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
+                  <td className=" px-6 py-4 bg-white whitespace-nowrap text-sm text-gray-900 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
                     {o.user.name}
                   </td>
-                  <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
+                  <td className="px-6 py-4 bg-white whitespace-nowrap text-sm text-gray-900 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
                     {o.mealType}
                   </td>
-                  <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
+                  <td className="px-6 py-4 bg-white whitespace-nowrap text-sm text-gray-900 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
                     {o.items.map((i) => (
                       <p>{i},</p>
                     ))}
                   </td>
-                  <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
+                  <td className="px-6 py-4 bg-white whitespace-nowrap text-sm text-gray-900 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
                     {new Date(o.orderDate).toDateString()}
                   </td>
-                  <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
+                  <td className="px-6 py-4 bg-white whitespace-nowrap text-sm text-gray-900 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
                     {o.status}
                   </td>
                   {o.source === "SUBSCRIPTION" ? (
-                    <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
+                    <td className="px-6 py-4 bg-white whitespace-nowrap text-sm text-gray-900 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
                       {o.source}
                     </td>
                   ) : (
-                    <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
+                    <td className="px-6 py-4 bg-white whitespace-nowrap text-sm text-gray-900 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
                       {o?.payment?.status}
                     </td>
                   )}
-                  <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
+                  <td className="px-6 py-4 bg-white whitespace-nowrap text-sm text-gray-900 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
                     {o.orderShippingType}
                   </td>
-                  <td className="border p-2 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none">
+                  <td className="px-6 py-4 bg-white whitespace-nowrap text-sm text-gray-900 transition-all duration-300 text-center group-hover:blur-sm group-hover:border-none ">
                     {o.user.address}
                   </td>
                   <td className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -347,17 +347,17 @@ const Orders = ({ handleGetMessData, messData }) => {
           Self Pick Orders
         </p>
 
-        <table className="w-full mt-5 ">
+        <table className="w-full border-collapse shadow-sm  divide-y divide-gray-200 mt-5 ">
           <thead>
             <tr>
-              <th className="border p-2">Name</th>
-              <th className="border p-2">Meal Type</th>
-              <th className="border p-2">Items</th>
-              <th className="border p-2">Order Date</th>
-              <th className="border p-2">Status</th>
-              <th className="border p-2">Payment</th>
-              <th className="border p-2">Shipping</th>
-              <th className="border p-2">Destination</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Name</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Meal Type</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Items</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Order Date</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Payment</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Shipping</th>
+              <th className="px-6 py-3  bg-indigo-500  text-xs font-bold text-center text-white uppercase tracking-wider">Destination</th>
             </tr>
           </thead>
           <tbody>

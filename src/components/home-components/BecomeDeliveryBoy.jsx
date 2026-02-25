@@ -1,20 +1,31 @@
 import React from 'react'
 import registerDelivery from '../../assests/images/registerDelivery.png'
 import { useNavigate } from 'react-router-dom'
+import ScrollReveal from '../../utils/ScrollReveal';
 
 const BecomeDeliveryBoy = () => {
 
 
   const navigate = useNavigate()
 
+ 
+
+
+
   return (
     <>
      <div className="flex flex-row sm:flex-col mx-5 gap-5 items-start sm:ml-15 my-20 ">
         <p className=" text-3xl sm:text-5xl font-bold text-indigo-500">Become Delivery Boy!</p>
-        <p className="text-sm font-medium text-gray-500">
-          {" "}
-          Transform your vehicle into an income source by becoming a delivery<br/> partner for our local meal service! If you have a bike, scooter, or car,<br/> a valid license, and a smartphone, you can start delivering fresh, <br/>prepared meals to customers in your area. This opportunity offers<br/> flexible hours that can work around your schedule, giving you the <br/> freedom to earn money independently. Utilize your vehicle to deliver <br/> quality, nutritious food and join a reliable team. Visit our website to <br/> sign up today and begin delivering soon.
-        </p>
+        <ScrollReveal
+  baseOpacity={0.1}
+  enableBlur
+  baseRotation={3}
+  blurStrength={4}
+>
+  <p className="text-sm font-medium text-gray-500 leading-relaxed tracking-wide">
+  Transform your vehicle into an income source by becoming a delivery partner for our local meal service! If you have a bike, scooter, or car, a valid license, and a smartphone, you can start delivering fresh, prepared meals to customers in your area. This opportunity offers flexible hours that can work around your schedule, giving you the freedom to earn money independently. Utilize your vehicle to deliver quality, nutritious food and join a reliable team. Visit our website to sign up today and begin delivering soon.
+  </p>
+</ScrollReveal>
       </div>
       <div className="mx-15 my-10 group relative">
               <img

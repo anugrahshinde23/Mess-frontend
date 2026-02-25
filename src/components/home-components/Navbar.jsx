@@ -18,10 +18,10 @@ const Navbar = () => {
     
      <div className='flex justify-between items-center  px-10 py-5 sm:py-7 sm:px-20 '>
         <div className=''>
-            <p className='lg:text-2xl  text-xl font-bold text-indigo-500 animate__animated animate__rubberBand' >MessMate</p>
+            <p className='lg:text-2xl  text-xl font-bold text-indigo-500 animate__animated animate__backInLeft' >MessMate</p>
         </div>
 
-        <div className='border hidden md:block border-indigo-500 md:px-5 md:py-1 lg:px-10 lg:py-3 rounded-full hover:bg-indigo-500 hover:text-white hover:border-white' >
+        <div className='border cursor-pointer animate__animated  animate__rubberBand hidden md:block border-indigo-500 md:px-5 md:py-1 lg:px-10 lg:py-3 rounded-full hover:bg-indigo-500 hover:text-white hover:border-white' >
             <ul className='flex md:gap-7 lg:gap-15 md:text-[11px] lg:text-sm font-bold ' >
                 <li className='cursor-pointer' >About Us</li>
                 <li className='cursor-pointer'>Contact Us</li>
@@ -31,7 +31,7 @@ const Navbar = () => {
 
         {!user ? 
         
-        <div className='flex gap-2 sm:gap-5'>
+        <div className='flex gap-2 sm:gap-5 animate__animated animate__backInRight'>
         <div className='bg-indigo-500 px-2 md:px-3  lg:px-4 lg:py-1 rounded-full hover:bg-indigo-400'  >
             <button className='text-white cursor-pointer text-[11px] sm:text-sm  font-bold' onClick={handleLoginAndRegisterButton}>
                 Login

@@ -10,4 +10,34 @@
     -ms-overflow-style: none;  /* IE & Edge */
     scrollbar-width: none;     /* Firefox */
   }
+
+  @layer base {
+    /* Width of vertical scrollbar */
+    ::-webkit-scrollbar {
+      @apply w-2;
+    }
+  
+    /* Track (background) */
+    ::-webkit-scrollbar-track {
+      @apply bg-indigo-100;
+    }
+  
+    /* Thumb (draggable part) */
+    ::-webkit-scrollbar-thumb {
+      @apply bg-indigo-400 rounded-full;
+    }
+  
+    /* Thumb on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      @apply bg-indigo-600;
+    }
+  }
+  
+  /* Firefox scrollbar */
+  @layer base {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #6366f1 #f3f4f6;
+    }
+  }  
   

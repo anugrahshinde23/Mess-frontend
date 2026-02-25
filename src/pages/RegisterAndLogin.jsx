@@ -5,6 +5,10 @@ import { loginApi, registerApi } from "../services/auth.services";
 import { toast } from "react-toastify";
 import * as MaterialDesignIcons from 'react-icons/md'
 
+import TextType from '../utils/TextType';
+
+
+
 const RegisterAndLogin = () => {
   const [isLoginActive, setIsLoginActive] = useState(false);
 
@@ -104,7 +108,19 @@ const RegisterAndLogin = () => {
         <div className="flex flex-col sm:flex-row w-full h-full">
           <div className="sm:w-1/2 py-10  w-full bg-indigo-500 rounded-br-[200px] rounded-bl-[200px]  sm:rounded-bl-none sm:rounded-tr-[200px] flex flex-col items-center justify-center ">
             <div className="text-white font-bold flex flex-col items-center gap-2 sm:gap-5">
-              <p className=" text-3xl sm:text-4xl md:text-5xl">Welcome Back!</p>
+              <div className=" text-3xl sm:text-4xl md:text-5xl">
+              <TextType
+  text={[
+    "Welcome Back!",
+    "Login to Continue",
+    "Good to See You Again 👋"
+  ]}
+  typingSpeed={70}
+  deletingSpeed={40}
+  pauseDuration={1500}
+  showCursor
+/>
+              </div>
               <p className="text-sm sm:text-[16px]">Dont have an account?</p>
             </div>
 
@@ -242,7 +258,19 @@ const RegisterAndLogin = () => {
 
           <div className="sm:w-1/2 py-10  w-full bg-indigo-500 rounded-br-[200px] rounded-bl-[200px] sm:rounded-bl-[200px] sm:rounded-br-none sm:rounded-tl-[200px] flex flex-col items-center justify-center">
             <div className="text-white font-bold flex flex-col items-center gap-2 sm:gap-5">
-              <p className="text-3xl sm:text-4xl md:text-5xl">Welcome Back!</p>
+              <div className="text-3xl sm:text-4xl md:text-5xl">
+              <TextType
+  text={[
+    "Welcome to MessMate!",
+    "Register to Continue",
+    
+  ]}
+  typingSpeed={70}
+  deletingSpeed={40}
+  pauseDuration={1500}
+  showCursor
+/>
+              </div>
               <p className="text-sm sm:text-[16px]">Already have an account?</p>
             </div>
 
