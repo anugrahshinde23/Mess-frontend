@@ -166,7 +166,7 @@ const RegisterAndLogin = () => {
               </div>
 
               <div className="bg-indigo-500 flex justify-center w-2/3 md:w-1/2 rounded-2xl">
-              <button className="px-3 py-2 sm:px-4 sm:py-3 text-white font-bold bg-blue-600" type="submit" disabled={Loading}>
+              <button className="px-3 py-2 sm:px-4 sm:py-3 text-white font-bold " type="submit" disabled={Loading}>
   {Loading ? (
     <svg className="animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
