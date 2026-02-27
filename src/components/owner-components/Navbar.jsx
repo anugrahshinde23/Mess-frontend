@@ -14,7 +14,7 @@ const Navbar = () => {
         setOpenNotifyModal(false)
     }
 
-    const handleMarkARead = async (notificationId) => {
+    const handleMarkAsRead = async (notificationId) => {
         try {
             const res = await markAsReadApi(notificationId)
             console.log(res);
@@ -68,7 +68,7 @@ const { user } = useAuth()
             )}
             </div>
 
-            {openNotifyModal && <NotificationModal closeNotifyModal={closeNotifyModal} notifications={notifications} handleMarkARead={handleMarkARead} />}
+            {openNotifyModal && <NotificationModal closeNotifyModal={closeNotifyModal} notifications={notifications} handleMarkAsRead={handleMarkAsRead} />}
             <MaterialDesignIcons.MdPerson  size={40} color='#667eea'/>
             </div>
             <div className='flex flex-col hidden sm:block'>

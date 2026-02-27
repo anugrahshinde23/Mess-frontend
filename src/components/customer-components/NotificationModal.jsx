@@ -1,6 +1,7 @@
 import React from 'react'
 
 const NotificationModal = ({closeNotifyModal, notifications, handleMarkAsRead}) => {
+
   return (
     <>
      <div className="fixed inset-0 z-50 flex justify-end backdrop-blur-sm">

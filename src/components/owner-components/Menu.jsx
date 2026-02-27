@@ -3,8 +3,9 @@ import { getTodaysMenuApi, setTodaysMenuApi } from "../../services/menu.services
 import { toast } from "react-toastify";
 
 
-const PEXELS_API_KEY="sqN9Uuyg9ucug1EiiXquuny55IghQcG7YV32gEWdnp5AqN1Wh3Xyvzy7"
+// const PEXELS_API_KEY="sqN9Uuyg9ucug1EiiXquuny55IghQcG7YV32gEWdnp5AqN1Wh3Xyvzy7"
 
+const UNSPLASH_API_KEY="DiPvtvT3QnhYWI7JQPKGCaVwX5arg3Ya-QL2CG-iibc"
 
 const Menu = () => {
   const [getMenu, setGetMenu] = useState(null);
@@ -34,13 +35,20 @@ const Menu = () => {
   const fetchFoodImage = async (foodName) => {
     try {
       const response = await fetch(
-        `https://api.pexels.com/v1/search?query=${foodName}&per_page=1`,
-        { headers: { Authorization: PEXELS_API_KEY } }
+        `https://api.unsplash.com/search/photos?query=${foodName}&per_page=1`,
+        {
+          headers: {
+            Authorization: `Client-ID ${UNSPLASH_API_KEY}`,
+          },
+        }
       );
+  
       const data = await response.json();
-      if (data.photos && data.photos.length > 0) {
-        return data.photos[0].src.medium;
+  
+      if (data.results && data.results.length > 0) {
+        return data.results[0].urls.small;
       }
+  
       return null;
     } catch (error) {
       console.error("Error fetching image for", foodName, error);
@@ -123,18 +131,18 @@ const Menu = () => {
         {section.startTime} - {section.endTime}
       </p>
       </div>
-      <div className="mt-2 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
         {section.items.map((item) => (
           <div
             key={item}
-            className="flex flex-col items-center  rounded-lg shadow hover:shadow-lg transition overflow-hidden group"
+           className="bg-white rounded-xl shadow-md hover:shadow-xl transition overflow-hidden group"
           >
             {foodImages[item] ? (
-              <img
-                src={foodImages[item]}
-                alt={item}
-                className="w-full  object-cover group-hover:scale-110 transition-transform duration-300"
-              />
+             <img
+             src={foodImages[item]}
+             alt={item}
+             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+           />
             ) : (
               <div className="w-full h-28 bg-gray-200 flex items-center justify-center text-gray-500">
                 No Image
