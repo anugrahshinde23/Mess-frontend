@@ -20,6 +20,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Loader from './utils/Loader';
 import ProgressNav from './utils/ProgressNav';
 import TargetCursor from './utils/TargetCursor';
+import VerityChatPage from './pages/VerityChatPage';
+import VerityChatButton from './components/verity-components/VerityChatButton';
 
 
 
@@ -72,7 +74,9 @@ const App = () => {
             <Route path="/delivery-boy-dashboard" element={<RoleProtectedRoutes allowedRoles={["DELIVERY_BOY"]}><DeliveryBoyDashboard /></RoleProtectedRoutes>} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/admin-dashboard" element={<RoleProtectedRoutes allowedRoles={["ADMIN"]}><AdminDashboard /></RoleProtectedRoutes>} />
+            <Route path='/verity' element={<VerityChatPage/>}/>
           </Routes>
+          <VerityChatButton/>
         </>
       )}
     </>
