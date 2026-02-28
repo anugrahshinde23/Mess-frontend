@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { askVerityApi } from '../services/verity.services';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'; // VS Code Dark Theme
+
 
 
 const VerityChatPage = () => {
@@ -92,14 +95,41 @@ const VerityChatPage = () => {
                                     ? 'bg-indigo-600 text-white rounded-2xl rounded-tr-none' 
                                     : 'bg-white border border-gray-200 text-gray-700 rounded-2xl rounded-tl-none'
                                 }`}>
-                                    <ReactMarkdown 
-        remarkPlugins={[remarkGfm]}
-        className="prose prose-sm max-w-none break-words dark:prose-invert 
-                   prose-p:leading-relaxed prose-pre:bg-gray-800 prose-pre:text-gray-100 
-                   prose-code:text-pink-500 prose-ul:list-disc prose-ol:list-decimal"
-    >
-        {m.text}
-    </ReactMarkdown>
+                                    <ReactMarkdown
+    remarkPlugins={[remarkGfm]}
+    className="prose prose-sm max-w-none break-words"
+    components={{
+        // Ye function tab chalega jab Markdown mein code block (```) milega
+        code({ node, inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || '');
+            return !inline && match ? (
+                <div className="rounded-lg overflow-hidden my-4 shadow-md">
+                    <div className="bg-gray-800 text-gray-400 text-xs px-4 py-1 flex justify-between items-center">
+                        <span>{match[1]}</span>
+                    </div>
+                    <SyntaxHighlighter
+                        style={vscDarkPlus}
+                        language={match[1]}
+                        PreTag="div"
+                        {...props}
+                    >
+                        {String(children).replace(/\n$/, '')}
+                    </SyntaxHighlighter>
+                </div>
+            ) : (
+                <code className="bg-gray-200 text-pink-600 px-1 rounded font-bold" {...props}>
+                    {children}
+                </code>
+            );
+        },
+        // Important part (Bold) ko highlight karne ke liye
+        strong({ children }) {
+            return <strong className="text-orange-600 font-extrabold">{children}</strong>;
+        }
+    }}
+>
+    {m.text}
+</ReactMarkdown>
                                 </div>
                             </div>
                         </div>
