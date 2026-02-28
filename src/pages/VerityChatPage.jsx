@@ -121,7 +121,7 @@ const VerityChatPage = () => {
             </main>
 
             <footer className="p-4 bg-white border-t md:px-20 lg:px-64">
-                <div className="max-w-4xl mx-auto flex items-center gap-3 bg-gray-100 p-1.5 rounded-2xl border focus-within:border-orange-300 transition-all shadow-sm">
+                <div className="max-w-4xl mx-auto flex items-center gap-3 bg-gray-100 p-1.5 rounded-2xl border focus-within:border-indigo-300 transition-all shadow-sm">
                     <input
                         type="text"
                         value={input}
