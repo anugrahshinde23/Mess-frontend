@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Send, User, Bot, ArrowLeft, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { askVerityApi } from '../services/verity.services';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
 
 const VerityChatPage = () => {
     const [input, setInput] = useState('');
@@ -89,7 +92,14 @@ const VerityChatPage = () => {
                                     ? 'bg-indigo-600 text-white rounded-2xl rounded-tr-none' 
                                     : 'bg-white border border-gray-200 text-gray-700 rounded-2xl rounded-tl-none'
                                 }`}>
-                                    {m.text}
+                                    <ReactMarkdown 
+        remarkPlugins={[remarkGfm]}
+        className="prose prose-sm max-w-none break-words dark:prose-invert 
+                   prose-p:leading-relaxed prose-pre:bg-gray-800 prose-pre:text-gray-100 
+                   prose-code:text-pink-500 prose-ul:list-disc prose-ol:list-decimal"
+    >
+        {m.text}
+    </ReactMarkdown>
                                 </div>
                             </div>
                         </div>
