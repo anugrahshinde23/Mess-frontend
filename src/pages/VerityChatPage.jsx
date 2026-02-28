@@ -31,8 +31,11 @@ const VerityChatPage = () => {
             // 3. API payload check karein (aapka backend 'msg' key expect kar raha hai)
             const response = await askVerityApi({ msg: currentInput });
 
+            console.log(response);
+            
+
             // 4. Response data handle karein
-            setMessages(prev => [...prev, { role: 'ai', text: response.data.reply }]);
+            setMessages(prev => [...prev, { role: 'ai', text: response?.reply }]);
         } catch (error) {
             console.error("Chat Error:", error);
             setMessages(prev => [...prev, { role: 'ai', text: "Server error! Please check your connection." }]);
