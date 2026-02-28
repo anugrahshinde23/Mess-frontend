@@ -56,13 +56,13 @@ const VerityChatPage = () => {
                         <ArrowLeft size={20} />
                     </button>
                     <div className="flex items-center gap-3">
-                        <div className="bg-orange-500 p-2 rounded-xl text-white shadow-md">
+                        <div className="bg-indigo-500 p-2 rounded-xl text-white shadow-md">
                             <Bot size={24} />
                         </div>
                         <div>
                             <h1 className="text-lg font-bold text-gray-800 tracking-tight">Verity AI</h1>
                             <span className="flex items-center gap-1.5 text-[11px] text-green-500 font-semibold uppercase">
-                                <span className="h-1.5 w-1.5 bg-green-500 rounded-full animate-pulse"></span> Online
+                                
                             </span>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ const VerityChatPage = () => {
                         <div key={index} className={`flex w-full ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div className={`flex max-w-[85%] gap-4 ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                                 <div className={`h-9 w-9 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
-                                    m.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-white border text-orange-500'
+                                    m.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-white border text-indigo-500'
                                 }`}>
                                     {m.role === 'user' ? <User size={18} /> : <Bot size={18} />}
                                 </div>
@@ -106,7 +106,7 @@ const VerityChatPage = () => {
                     ))}
                     {isLoading && (
                         <div className="flex justify-start gap-4">
-                            <div className="h-9 w-9 rounded-full bg-white border flex items-center justify-center text-orange-500">
+                            <div className="h-9 w-9 rounded-full bg-white border flex items-center justify-center text-indigo-500">
                                 <Bot size={18} />
                             </div>
                             <div className="bg-white border p-4 rounded-2xl flex gap-1">
@@ -130,7 +130,7 @@ const VerityChatPage = () => {
                         placeholder="Message Verity..."
                         className="flex-1 bg-transparent outline-none px-4 py-3"
                     />
-                    <button onClick={handleSend} disabled={isLoading || !input.trim()} className="bg-orange-500 text-white p-3 rounded-xl disabled:bg-gray-200">
+                    <button onClick={handleSend} disabled={isLoading || !input.trim()} className="bg-indigo-500 text-white p-3 rounded-xl disabled:bg-gray-200">
                         <Send size={18} />
                     </button>
                 </div>
