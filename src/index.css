@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import 'animate.css';
 
+@theme {
+  --color-scheme: light dark;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Hide scrollbar but keep scrolling */
 .no-scrollbar::-webkit-scrollbar {
     display: none;

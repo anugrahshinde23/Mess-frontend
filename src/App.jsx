@@ -74,7 +74,7 @@ const App = () => {
             <Route path="/delivery-boy-dashboard" element={<RoleProtectedRoutes allowedRoles={["DELIVERY_BOY"]}><DeliveryBoyDashboard /></RoleProtectedRoutes>} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/admin-dashboard" element={<RoleProtectedRoutes allowedRoles={["ADMIN"]}><AdminDashboard /></RoleProtectedRoutes>} />
-            <Route path='/verity' element={<VerityChatPage/>}/>
+            <Route path='/verity' element={<ProtectedRoutes><VerityChatPage/></ProtectedRoutes>}/>
           </Routes>
           <VerityChatButton/>
         </>
