@@ -3,7 +3,7 @@ import * as MaterialDesignIcons from "react-icons/md";
 import { SocialIcon } from "react-social-icons";
 import anugrah from '../../assests/images/anugrah.png'
 import anugrah2 from '../../assests/images/anugrah2.png'
-import elonmusk from '../../assests/images/elon_musk.png'
+import samarth from '../../assests/images/samarth1.png'
 
 const OurTeam = () => {
   return (
@@ -37,7 +37,7 @@ const OurTeam = () => {
             </div>
           </div>
           <div className="bg-indigo-500  rounded-full h-40 w-40 sm:h-80 sm:w-80">
-            <img src={elonmusk} alt="Elon Musk" className="   bottom-5  h-full w-full rounded-full object-contain" />
+            <img src={samarth} alt="Samarth" className="   bottom-5  h-full w-full rounded-full object-contain" />
           </div>
         </div>
         <div className="hidden sm:flex sm:justify-between   items-end mx-12 my-10 ">

@@ -416,7 +416,7 @@ useEffect(() => {
   <button
   onClick={handlePuterImageGenerate}
   disabled={isLoading || !input.trim()}
-  className="bg-green-500 text-white p-3 rounded-3xl disabled:bg-gray-200"
+  className="bg-green-500 font-medium text-white p-2 rounded-lg disabled:bg-gray-200"
 >
   Generate image
 </button>

@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("verity_chat_id")
     setUser(null);
   };
 

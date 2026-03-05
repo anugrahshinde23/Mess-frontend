@@ -12,6 +12,9 @@ import {
 } from "../services/subscription.services";
 import PlaceOrderModal from "../components/customer-components/PlaceOrderModal";
 
+
+const UNSPLASH_API_KEY="DiPvtvT3QnhYWI7JQPKGCaVwX5arg3Ya-QL2CG-iibc"
+
 const MessDetailPage = () => {
   const { messId } = useParams();
 
@@ -21,6 +24,8 @@ const MessDetailPage = () => {
 
   const [oneTimePrice, setOneTimePrice] = useState(null)
 
+  const [menu, setMenu] = useState(null);
+
   const currentMessSubscription = subscription.find(
     (s) =>
       s.mess.toString() === messId &&
@@ -29,6 +34,55 @@ const MessDetailPage = () => {
 
   const [showOrderModal, setShowOrderModal] = useState(false)
   
+
+
+
+  const [foodImages, setFoodImages] = useState({})
+
+  const fetchFoodImage = async (foodName) => {
+    try {
+      const response = await fetch(
+        `https://api.unsplash.com/search/photos?query=${foodName}&per_page=1`,
+        {
+          headers: {
+            Authorization: `Client-ID ${UNSPLASH_API_KEY}`,
+          },
+        }
+      );
+  
+      const data = await response.json();
+  
+      if (data.results && data.results.length > 0) {
+        return data.results[0].urls.small;
+      }
+  
+      return null;
+    } catch (error) {
+      console.error("Error fetching image for", foodName, error);
+      return null;
+    }
+  };
+
+  // Fetch images for all food items
+  const fetchAllFoodImages = async (menuData) => {
+    const allItems = [
+      ...menuData.breakfast.items,
+      ...menuData.lunch.items,
+      ...menuData.dinner.items,
+    ];
+    const uniqueItems = [...new Set(allItems)];
+    const images = {};
+    await Promise.all(
+      uniqueItems.map(async (item) => {
+        const url = await fetchFoodImage(item);
+        if (url) images[item] = url;
+      })
+    );
+    setFoodImages(images);
+  };
+
+
+
 
   const handleOneTimeOrder = async () => {
     setShowOrderModal(true)
@@ -84,7 +138,7 @@ const MessDetailPage = () => {
     }
   };
 
-  const [menu, setMenu] = useState(null);
+ 
 
   const handleGetTodaysMenuById = async () => {
     try {
@@ -103,6 +157,43 @@ const MessDetailPage = () => {
     handleGetTodaysMenuById();
     handleGetUserSubscription();
   }, []);
+
+  useEffect(() => {
+    if (menu?.menuData) fetchAllFoodImages(menu.menuData);
+  }, [menu]);
+
+
+  const renderFoodSection = (title, section) => (
+    <div className="p-5 bg-indigo-300 rounded-lg flex-1 flex flex-col gap-5 ">
+      <div className="flex justify-between w-full items-center ">
+      <p className="text-xl font-bold mb-2">{title}</p>
+      <p className="text-sm text-gray-500 bg-white px-2 py-1 rounded-full">
+        {section.startTime} - {section.endTime}
+      </p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+        {section.items.map((item) => (
+          <div
+            key={item}
+           className="bg-white rounded-xl shadow-md hover:shadow-xl transition overflow-hidden group"
+          >
+            {foodImages[item] ? (
+             <img
+             src={foodImages[item]}
+             alt={item}
+             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+           />
+            ) : (
+              <div className="w-full h-28 bg-gray-200 flex items-center justify-center text-gray-500">
+                No Image
+              </div>
+            )}
+            <p className="text-center font-semibold p-2">{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -134,7 +225,18 @@ const MessDetailPage = () => {
           </div>
 
           {menu ? (
-            <div>Menu is available</div>
+            <div className="flex flex-col items-center p-10 gap-20" >
+            <div className="flex justify-end  w-full" >
+                <p className=" text-xl sm:text-2xl font-bold text-zinc-400">Day: {menu?.menuData?.day}</p>
+            </div>
+            <div className="flex flex-col sm:flex-row justify-between gap-5 w-full">
+            {renderFoodSection("Breakfast", menu.menuData.breakfast)}
+            {renderFoodSection("Lunch", menu.menuData.lunch)}
+            {renderFoodSection("Dinner", menu.menuData.dinner)}
+          </div>
+           
+           
+          </div>
           ) : (
             <div>
               <p>No Menu Set For Today</p>

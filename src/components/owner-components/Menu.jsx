@@ -119,9 +119,7 @@ const Menu = () => {
     handleGetMenuData()
   }, [])
 
-  useEffect(() => {
-    if (getMenu?.menuData) fetchAllFoodImages(getMenu.menuData);
-  }, [getMenu]);
+  
 
   const renderFoodSection = (title, section) => (
     <div className="p-5 bg-indigo-300 rounded-lg flex-1 flex flex-col gap-5 ">

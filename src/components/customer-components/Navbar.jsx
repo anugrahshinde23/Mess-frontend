@@ -5,6 +5,7 @@ import NotificationModal from './NotificationModal'
 import { getNotifictaionApi, markAsReadApi } from '../../services/notification.services'
 import { toast } from 'react-toastify'
 import MenuBarModal from './MenuBarModal'
+import { useNavigate } from 'react-router-dom'
 
 
 const Navbar = ({handleLogout}) => {
@@ -13,11 +14,13 @@ const Navbar = ({handleLogout}) => {
   const [notifications, setNotifications] = useState([])
   const [MenuOpen, setMenuOpen] = useState(false)
 
+  const navigate = useNavigate()
+
 
   const menu = [
     "Home",
-    "Contact Us",
-    "Messes"
+    "Mess owner",
+    "Delivery partner"
   ]
 
   const closeMenuModal = () => {
@@ -81,9 +84,11 @@ const Navbar = ({handleLogout}) => {
             <p className='text-2xl font-bold text-indigo-500 '>MessMate</p>
         </div>
 
-        <div className='hidden sm:flex gap-20 text-sm font-bold'>
+        <div className='hidden sm:flex  gap-20 text-sm font-bold'>
             {menu.map((m) => (
-              <p>{m}</p>
+              <p className='cursor-pointer' onClick={() => {
+                m === "Home" ? navigate('/') : m === "Mess owner" ? navigate('/register-mess') : m === "Delivery partner" ? navigate('/register-delivery-boy') : null
+              }}>{m}</p>
             ))}
         </div>
 
