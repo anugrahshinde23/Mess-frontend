@@ -89,7 +89,17 @@ const OrderHistoryPageCustomer = () => {
                 <tr key={o._id}>
                   <td className="rounded-l-2xl p-2 text-center">{o.mealType}</td>
                   <td className=" p-2 text-center">{o.items.length}</td>
-                  <td className=" p-2 text-center">{o.orderDate}</td>
+                  <td className="p-2 text-center">
+  {new Date(o.orderDate).toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  })}
+</td>
                   <td className=" p-2 text-center">{o.status}</td>
                   <td className=" p-2 text-center">{o.orderShippingType}</td>
                   <td className=" p-2 text-center">{o.orderCompleteCode}</td>
