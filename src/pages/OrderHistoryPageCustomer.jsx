@@ -18,7 +18,11 @@ const OrderHistoryPageCustomer = () => {
       toast.success(res.message)
       
     } catch (error) {
-      toast.error("Failed to cancel order")
+
+      if(error.response?.data?.message === "Order has not yet assigned")
+        toast.info(error.response?.data?.message)
+      else 
+      toast.error(error.response?.data?.message)
     }
   }
 
