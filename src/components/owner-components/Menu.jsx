@@ -119,6 +119,10 @@ const Menu = () => {
     handleGetMenuData()
   }, [])
 
+  useEffect(() => {
+      if (menu?.menuData) fetchAllFoodImages(menu.menuData);
+  }, [menu]);
+
   
 
   const renderFoodSection = (title, section) => (

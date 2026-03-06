@@ -136,7 +136,7 @@ const RegisterAndLogin = () => {
 
           <div className="w-full  sm:w-1/2 mt-15 sm:mt-0 sm:h-screen justify-center flex flex-col items-center gap-7 sm:gap-7 md:gap-7  ">
             <div>
-              <p className="font-bold text-3xl  sm:text-4xl md:text-5xl sm:mb-3 md:mb-5 ">
+              <p className="font-bold text-3xl   sm:text-4xl md:text-5xl sm:mb-3 md:mb-5 ">
                 Login
               </p>
             </div>
@@ -181,7 +181,7 @@ const RegisterAndLogin = () => {
                 </p>
               </div>
 
-              <div className="bg-indigo-500 flex justify-center w-2/3 md:w-1/2 rounded-2xl">
+              <div className="bg-indigo-500 flex  justify-center w-2/3 md:w-1/2 rounded-2xl">
               <button className="px-3 py-2 sm:px-4 sm:py-3 text-white font-bold " type="submit" disabled={Loading}>
   {Loading ? (
     <svg className="animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
