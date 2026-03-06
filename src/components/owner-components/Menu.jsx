@@ -120,8 +120,8 @@ const Menu = () => {
   }, [])
 
   useEffect(() => {
-      if (menu?.menuData) fetchAllFoodImages(menu.menuData);
-  }, [menu]);
+      if (getMenu?.menuData) fetchAllFoodImages(getMenu.menuData);
+  }, [getMenu]);
 
   
 
