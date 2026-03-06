@@ -22,7 +22,7 @@ const OrderHistoryPageCustomer = () => {
       if(error.response?.data?.message === "Order has not yet assigned")
         toast.info(error.response?.data?.message)
       else 
-      toast.error(error.response?.data?.message)
+        toast.error(error.response?.data?.message)
     }
   }
 
