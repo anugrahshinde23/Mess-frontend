@@ -14,7 +14,7 @@ const HeroSection = ({activeTab, messData, handleGetMessData, showUpdateModal, s
 
   const [subscriptions, setSubscriptions] = useState([]);
   const [order, setOrders] = useState([]);
-  const [status, setStatus] = useState("")
+  const [status, setStatus] = useState("ACTIVE")
 
    const fetchSubscriptions = async (status) => {
       try {
@@ -44,6 +44,10 @@ const HeroSection = ({activeTab, messData, handleGetMessData, showUpdateModal, s
       useEffect(() => {
         fetchSubscriptions(status)
       }, [status])
+
+      useEffect(() => {
+        handleGetOrders()
+      }, [])
 
   return (
     <>
