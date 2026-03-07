@@ -91,7 +91,7 @@ const Orders = ({ messData, fetchSubscriptions,subscriptions, order , handleGetO
 
   useEffect(() => {
     setStatus(activeTab)
-  }, [activeTab]);
+  }, [activeTab, setStatus]);
 
   const handleApprove = async (id) => {
     await approvedByOwnerApi(id);
@@ -113,7 +113,10 @@ const Orders = ({ messData, fetchSubscriptions,subscriptions, order , handleGetO
         {statusTab.map((s) => (
           <p
             key={s.id}
-            onClick={() => setActiveTab(s.id)}
+            onClick={() =>{
+
+              setActiveTab(s.id)
+            }
             className={`cursor-pointer px-4 py-2 rounded-lg text-sm
               ${
                 activeTab === s.id
