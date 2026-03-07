@@ -116,7 +116,7 @@ const Orders = ({ messData, fetchSubscriptions,subscriptions, order , handleGetO
             onClick={() =>{
 
               setActiveTab(s.id)
-            }
+            }}
             className={`cursor-pointer px-4 py-2 rounded-lg text-sm
               ${
                 activeTab === s.id
