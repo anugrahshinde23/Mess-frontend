@@ -8,16 +8,14 @@ import {
 } from "../../services/subscription.services";
 import {
   getDboyByActiveOrderApi,
-  getOrdersApi,
 } from "../../services/order.services";
 import AssignOrderModal from "./AssignOrderModal";
 import CompleteOrderModal from "./CompleteOrderModal";
 
-const Orders = ({ handleGetMessData, messData, fetchSubscriptions,subscriptions }) => {
+const Orders = ({ handleGetMessData, messData, fetchSubscriptions,subscriptions, order , handleGetOrders }) => {
   const [activeTab, setActiveTab] = useState("ACTIVE");
   // const [subscriptions, setSubscriptions] = useState([]);
   const [orderTab, setOrderTab] = useState("placed");
-  const [order, setOrders] = useState([]);
   const [openAssignOrderModal, setOpenAssignOrderModal] = useState(false);
   const [orderId, setOrderId] = useState("");
   const [dBoyWidActiveOrder, setDboyWidActiveOrder] = useState(null);
@@ -52,19 +50,7 @@ const Orders = ({ handleGetMessData, messData, fetchSubscriptions,subscriptions 
     { id: "EXPIRED", label: "Expired" },
   ];
 
-  const handleGetOrders = async () => {
-    try {
-      const res = await getOrdersApi();
-      // console.log(res);
-      handleGetMessData();
-      setOrders(res.orderData);
-      // toast.success(res.message);
-    } catch (error) {
-      console.log(error.message);
-
-      // toast.error("Failed to fetch Orders");
-    }
-  };
+  
 
   const handleGetDeliveryBoyByActiveOrder = async (orderId) => {
     try {
