@@ -91,7 +91,6 @@ const Orders = ({ messData, fetchSubscriptions,subscriptions, order , handleGetO
 
   useEffect(() => {
     setStatus(activeTab)
-    fetchSubscriptions(activeTab);
   }, [activeTab]);
 
   const handleApprove = async (id) => {
