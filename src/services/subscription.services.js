@@ -30,3 +30,7 @@ export const getSubscriptionByStatusApi = async (status) => {
     return res.data
 }
 
+export const getTotalSubscriptionApi = async () => {
+    const res = await api.get('/subscription/get-total-subscription')
+    return res.data
+}

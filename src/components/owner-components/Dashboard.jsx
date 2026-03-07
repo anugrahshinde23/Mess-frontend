@@ -1,12 +1,31 @@
 import React, { useEffect } from 'react'
+import { getTotalSubscriptionApi } from '../../services/subscription.services'
+import { toast } from 'react-toastify'
 
-const Dashboard = ({subscriptions, order,fetchSubscriptions, status}) => {
+const Dashboard = ({subscriptions, order}) => {
 
 
+    const [subscription, setSubscription] = useState([])
 
-    useEffect(() => {
-            fetchSubscriptions(status)
-          }, [status])
+
+const handleGetTotalSubscription = async () => {
+    try {
+        const res = await getTotalSubscriptionApi()
+        console.log(res);
+        setSubscription(res.subData)
+        toast.success(res.message)
+    } catch (error) {
+        console.log(error);
+        toast.error(error.response?.data?.message)
+    }
+}
+
+
+useEffect(() => {
+
+handleGetTotalSubscription()
+ 
+}, [])
 
 
   return (
@@ -19,7 +38,7 @@ const Dashboard = ({subscriptions, order,fetchSubscriptions, status}) => {
         <div className='grid grid-cols-4   gap-5'>
             <div  className='bg-indigo-300 flex flex-col gap-3 rounded-lg p-5'>
                 <p className='text-sm font-bold '>Total Subscription</p>
-               <p className='text-4xl font-medium '>{subscriptions.length}</p>
+               <p className='text-4xl font-medium '>{subscription.length}</p>
             </div>
             <div className='bg-indigo-300 flex flex-col gap-3 rounded-lg p-5'>
                 <p className='text-sm font-bold '>Total Orders</p>
