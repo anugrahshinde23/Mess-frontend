@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const Dashboard = ({subscriptions, order}) => {
+const Dashboard = ({subscriptions, order,fetchSubscriptions, status}) => {
 
+
+
+    useEffect(() => {
+            fetchSubscriptions(status)
+          }, [status])
 
 
   return (

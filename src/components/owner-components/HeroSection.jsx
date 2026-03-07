@@ -53,7 +53,7 @@ const HeroSection = ({activeTab, messData, handleGetMessData, showUpdateModal, s
     <>
     
     <div className='bg-zinc-200 max-w-full sm:w-full overflow-auto my-4 mx-4 sm:mx-4 sm:my-0 rounded-2xl' >
-        {activeTab === 'tab1' && <Dashboard order={order} subscriptions={subscriptions} />}
+        {activeTab === 'tab1' && <Dashboard status={status} fetchSubscriptions={fetchSubscriptions} order={order} subscriptions={subscriptions} />}
         {activeTab === 'tab2' && <Shop messData={messData} handleGetMessData={handleGetMessData} showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} />}
         {activeTab === 'tab3' && <Orders setStatus={setStatus} order={order} handleGetOrders={handleGetOrders}  subscriptions={subscriptions} fetchSubscriptions={fetchSubscriptions} handleGetMessData={handleGetMessData} messData={messData}/>}
         {activeTab === 'tab4' && <DeliveryBoy messData={messData} handleGetMessData={handleGetMessData}/>}
