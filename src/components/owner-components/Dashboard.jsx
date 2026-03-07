@@ -38,6 +38,7 @@ const handleGetDboys = async() => {
 useEffect(() => {
 
 handleGetTotalSubscription()
+handleGetDboys()
  
 }, [])
 
@@ -58,9 +59,9 @@ handleGetTotalSubscription()
                 <p className='text-sm font-bold '>Total Orders</p>
                 <p className='text-4xl font-medium '>{order.length}</p>
             </div>
-            <div className='bg-indigo-300 rounded-lg p-5'>
-                <p>Total D-Boys</p>
-                <p>{dBoy.length}</p>
+            <div className='bg-indigo-300 flex flex-col gap-3 rounded-lg p-5'>
+                <p className='text-sm font-bold'>Total D-Boys</p>
+                <p  className='text-4xl font-medium '>{dBoy.length}</p>
             </div>
             <div className='bg-indigo-300 rounded-lg p-5'>
                 <p>Todays Revenue</p>
