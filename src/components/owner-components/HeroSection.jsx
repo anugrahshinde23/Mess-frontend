@@ -19,7 +19,7 @@ const HeroSection = ({activeTab, messData, handleGetMessData, showUpdateModal, s
        
         setSubscriptions(res.subsData);
       } catch (err) {
-        toast.error("Failed to fetch subscriptions");
+        toast.error(err.response?.data?.message);
       }
     };
 
