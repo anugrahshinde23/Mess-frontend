@@ -26,7 +26,7 @@ const handleGetDboys = async() => {
     try {
         const res = await getDeliveryBoysApi()
         console.log(res);
-        setDboy(res.dBoy)
+        setDboy(res.dBoyData)
         toast.success(res.message)
     } catch (error) {
         console.log(error);
