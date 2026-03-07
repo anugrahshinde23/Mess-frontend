@@ -37,7 +37,7 @@ const OwnerDashBoard = () => {
            navigate('/')
        }, 1500);
    } catch (err) {
-       toast.error("Failed to logout")
+       toast.error(err.response?.data?.message)
    }
   }
 
