@@ -53,3 +53,8 @@ export const rejectOrderRequestApi = async (data) => {
     const res = await api.put("deliveryboy/reject-order-request", data)
     return res.data
 }
+
+export const getDeliveryBoysApi = async () => {
+    const res = await api.get('deliveryboy/get-dboy-of-mess')
+    return res.data
+}

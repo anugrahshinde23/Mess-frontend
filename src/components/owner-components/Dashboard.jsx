@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { getTotalSubscriptionApi } from '../../services/subscription.services'
 import { toast } from 'react-toastify'
+import { getDeliveryBoysApi } from '../../services/deliveryBoyServices'
 
 const Dashboard = ({subscriptions, order}) => {
 
 
     const [subscription, setSubscription] = useState([])
 
+    const [dBoy, setDboy] = useState([])
 
 const handleGetTotalSubscription = async () => {
     try {
         const res = await getTotalSubscriptionApi()
         console.log(res);
         setSubscription(res.subData)
+        toast.success(res.message)
+    } catch (error) {
+        console.log(error);
+        toast.error(error.response?.data?.message)
+    }
+}
+
+const handleGetDboys = async() => {
+    try {
+        const res = await getDeliveryBoysApi()
+        console.log(res);
+        setDboy(res.dBoy)
         toast.success(res.message)
     } catch (error) {
         console.log(error);
@@ -46,6 +60,7 @@ handleGetTotalSubscription()
             </div>
             <div className='bg-indigo-300 rounded-lg p-5'>
                 <p>Total D-Boys</p>
+                <p>{dBoy.length}</p>
             </div>
             <div className='bg-indigo-300 rounded-lg p-5'>
                 <p>Todays Revenue</p>
