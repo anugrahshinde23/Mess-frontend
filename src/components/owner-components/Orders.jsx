@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 
 import {
   approvedByOwnerApi,
-  getSubscriptionByStatusApi,
   rejectedByOwnerApi,
 } from "../../services/subscription.services";
 import {
