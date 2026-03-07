@@ -12,7 +12,7 @@ import {
 import AssignOrderModal from "./AssignOrderModal";
 import CompleteOrderModal from "./CompleteOrderModal";
 
-const Orders = ({ handleGetMessData, messData, fetchSubscriptions,subscriptions, order , handleGetOrders }) => {
+const Orders = ({ messData, fetchSubscriptions,subscriptions, order , handleGetOrders,setStatus }) => {
   const [activeTab, setActiveTab] = useState("ACTIVE");
   // const [subscriptions, setSubscriptions] = useState([]);
   const [orderTab, setOrderTab] = useState("placed");
@@ -90,6 +90,7 @@ const Orders = ({ handleGetMessData, messData, fetchSubscriptions,subscriptions,
   // };
 
   useEffect(() => {
+    setStatus(activeTab)
     fetchSubscriptions(activeTab);
   }, [activeTab]);
 

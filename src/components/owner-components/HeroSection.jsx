@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Shop from './Shop'
 import Settings from './Settings'
 import Menu from './Menu'
@@ -14,6 +14,7 @@ const HeroSection = ({activeTab, messData, handleGetMessData, showUpdateModal, s
 
   const [subscriptions, setSubscriptions] = useState([]);
   const [order, setOrders] = useState([]);
+  const [status, setStatus] = useState("")
 
    const fetchSubscriptions = async (status) => {
       try {
@@ -40,14 +41,17 @@ const HeroSection = ({activeTab, messData, handleGetMessData, showUpdateModal, s
         }
       };
 
+      useEffect(() => {
+        fetchSubscriptions(status)
+      }, [status])
 
   return (
     <>
     
     <div className='bg-zinc-200 max-w-full sm:w-full overflow-auto my-4 mx-4 sm:mx-4 sm:my-0 rounded-2xl' >
-        {activeTab === 'tab1' && <Dashboard subscriptions={subscriptions} />}
+        {activeTab === 'tab1' && <Dashboard order={order} subscriptions={subscriptions} />}
         {activeTab === 'tab2' && <Shop messData={messData} handleGetMessData={handleGetMessData} showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} />}
-        {activeTab === 'tab3' && <Orders order={order} handleGetOrders={handleGetOrders}  subscriptions={subscriptions} fetchSubscriptions={fetchSubscriptions} handleGetMessData={handleGetMessData} messData={messData}/>}
+        {activeTab === 'tab3' && <Orders setStatus={setStatus} order={order} handleGetOrders={handleGetOrders}  subscriptions={subscriptions} fetchSubscriptions={fetchSubscriptions} handleGetMessData={handleGetMessData} messData={messData}/>}
         {activeTab === 'tab4' && <DeliveryBoy messData={messData} handleGetMessData={handleGetMessData}/>}
         {activeTab === 'tab5' && <Menu/>}
         {activeTab === 'tab6' && <Plan messData={messData} handleGetMessData={handleGetMessData}/>}

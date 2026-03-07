@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Dashboard = ({subscriptions}) => {
+const Dashboard = ({subscriptions, order}) => {
 
 
 
@@ -16,8 +16,9 @@ const Dashboard = ({subscriptions}) => {
                 <p className='text-sm font-bold '>Total Subscription</p>
                <p className='text-4xl font-medium '>{subscriptions.length}</p>
             </div>
-            <div className='bg-indigo-300 rounded-lg p-5'>
-                <p>Total Orders</p>
+            <div className='bg-indigo-300 flex flex-col gap-3 rounded-lg p-5'>
+                <p className='text-sm font-bold '>Total Orders</p>
+                <p className='text-4xl font-medium '>{order.length}</p>
             </div>
             <div className='bg-indigo-300 rounded-lg p-5'>
                 <p>Total D-Boys</p>
