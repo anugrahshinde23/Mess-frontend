@@ -14,9 +14,9 @@ import {
 import AssignOrderModal from "./AssignOrderModal";
 import CompleteOrderModal from "./CompleteOrderModal";
 
-const Orders = ({ handleGetMessData, messData }) => {
+const Orders = ({ handleGetMessData, messData, fetchSubscriptions,subscriptions }) => {
   const [activeTab, setActiveTab] = useState("ACTIVE");
-  const [subscriptions, setSubscriptions] = useState([]);
+  // const [subscriptions, setSubscriptions] = useState([]);
   const [orderTab, setOrderTab] = useState("placed");
   const [order, setOrders] = useState([]);
   const [openAssignOrderModal, setOpenAssignOrderModal] = useState(false);
@@ -93,16 +93,16 @@ const Orders = ({ handleGetMessData, messData }) => {
 
   const [userPin, setUserPin] = useState("");
 
-  const fetchSubscriptions = async (status) => {
-    try {
-      const res = await getSubscriptionByStatusApi(status);
-      console.log(res);
+  // const fetchSubscriptions = async (status) => {
+  //   try {
+  //     const res = await getSubscriptionByStatusApi(status);
+  //     console.log(res);
      
-      setSubscriptions(res.subsData);
-    } catch (err) {
-      toast.error("Failed to fetch subscriptions");
-    }
-  };
+  //     setSubscriptions(res.subsData);
+  //   } catch (err) {
+  //     toast.error("Failed to fetch subscriptions");
+  //   }
+  // };
 
   useEffect(() => {
     fetchSubscriptions(activeTab);
