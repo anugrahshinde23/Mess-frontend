@@ -88,7 +88,13 @@ const OrderHistoryPageCustomer = () => {
     .filter((o) => o.status.toLowerCase() === selectedOrder).map((o) => (
                 <tr key={o._id}>
                   <td className="rounded-l-2xl p-2 text-center">{o.mealType}</td>
-                  <td className=" p-2 text-center">{o.items.length}</td>
+                  <td className=" p-2 text-center"> <div className="flex flex-wrap gap-1 justify-center">
+ {o?.items?.map((item,i)=>(
+   <span key={i} className="bg-indigo-100 text-indigo-700 text-xs px-2 py-1 rounded">
+     {item}
+   </span>
+ ))}
+</div></td>
                   <td className="p-2 text-center">
   {new Date(o.orderDate).toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",

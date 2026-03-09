@@ -20,24 +20,40 @@ const TopBar = ({dBoy, logout}) => {
   return (
     <>
     
-    <div className='p-5 border rounded-2xl border-indigo-500 mt-10 
-     mx-15 sm:mx-26 flex justify-between items-center px-5 sm:px-10 overflow-x-auto sm:overflow-visible whitespace-nowrap scroll-smooth no-scrollbar '>
-        {dBoyTab.map((d)=>(
-            <div key={d.id} onClick={() => {
-              setActivetTab(d.id)
-            }}
-            className={`${activeTab === d.id ? 'bg-indigo-500 text-white font-bold cursor-pointer px-3 py-2 rounded-2xl text-sm':'text-sm cursor-pointer hover:bg-zinc-300 px-3 py-2 rounded-2xl'}`}
-            >
-                {d.label}
-            </div>
-        ))}
-    </div>
-    <div className='h-150 mx-15 sm:mx-26 my-10 rounded-2xl overflow-auto border border-indigo-500'>
-      {activeTab === "tab1" && <Dashboard/>}
-      {activeTab === "tab2" && <Messes dBoy={dBoy}/>}
-      {activeTab === "tab3" && <Orders dBoy={dBoy}/>}
-      {activeTab === "tab4" && <Settings logout={logout} />}
-    </div>
+    <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-10">
+
+{/* TAB BAR */}
+<div className="bg-white border border-zinc-300 rounded-xl shadow-sm px-4 py-3 flex gap-3 overflow-x-auto whitespace-nowrap scroll-smooth">
+
+  {dBoyTab.map((d) => (
+    <button
+      key={d.id}
+      onClick={() => setActivetTab(d.id)}
+      className={`px-4 py-2 text-sm rounded-lg transition font-medium
+      ${
+        activeTab === d.id
+          ? "bg-indigo-600 text-white shadow"
+          : "text-zinc-600 hover:bg-zinc-100"
+      }`}
+    >
+      {d.label}
+    </button>
+  ))}
+
+</div>
+
+
+{/* TAB CONTENT */}
+<div className="my-6 bg-white border border-zinc-300 rounded-xl shadow-sm p-6 min-h-[600px] overflow-auto">
+
+  {activeTab === "tab1" && <Dashboard />}
+  {activeTab === "tab2" && <Messes dBoy={dBoy} />}
+  {activeTab === "tab3" && <Orders dBoy={dBoy} />}
+  {activeTab === "tab4" && <Settings logout={logout} />}
+
+</div>
+
+</div>
     </>
   )
 }

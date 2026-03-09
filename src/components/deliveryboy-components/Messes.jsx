@@ -9,24 +9,38 @@ const Messes = ({dBoy}) => {
   return (
     <>
 
-    <div className='p-10'>
-        <p className='text-3xl text-indigo-500 font-bold'>Joined Messes</p>
+<div className="p-8">
 
-        <div className='mt-10 '>
-            <div className='flex  justify-between px-10 py-5  bg-zinc-300 rounded-2xl mb-5 font-bold'>
-                <p>Mess</p>
-                <p>Address</p>
-                <p>Owner</p>
-            </div>
-            {workingMessesData.map((w) => (
-                <div key={w._id} className='rounded-2xl w-full flex gap-3 sm:gap-0 justify-between py-5 px-10 font-semibold bg-indigo-300'>
-                    <p>{w.name}</p>
-                    <p>{w.address}</p>
-                    <p>{w.owner.name}</p>
-                </div>
-            ))}
-        </div>
+{/* TITLE */}
+<p className="text-3xl font-bold text-indigo-600">
+  Joined Messes
+</p>
+
+{/* TABLE CARD */}
+<div className="mt-8 bg-white border border-zinc-300 rounded-xl shadow-sm overflow-hidden">
+
+  {/* TABLE HEADER */}
+  <div className="grid grid-cols-3 px-6 py-4 bg-indigo-50 text-indigo-700 font-semibold text-sm">
+    <p>Mess</p>
+    <p>Address</p>
+    <p>Owner</p>
+  </div>
+
+  {/* TABLE BODY */}
+  {workingMessesData.map((w) => (
+    <div
+      key={w._id}
+      className="grid grid-cols-3 px-6 py-4 border-t border-zinc-300 text-sm text-zinc-700 hover:bg-zinc-50 transition"
+    >
+      <p className="font-medium">{w.name}</p>
+      <p className="text-zinc-600">{w.address}</p>
+      <p className="font-medium">{w.owner.name}</p>
     </div>
+  ))}
+
+</div>
+
+</div>
     
     </>
   )

@@ -162,171 +162,238 @@ const Menu = () => {
   if (!getMenu)
     return (
       <>
-        <div className="flex flex-col items-center gap-20 p-10">
-          <p className="text-2xl text-zinc-400 font-bold">
-            You have not set any Menu for your Mess yet
-          </p>
+    <div className="w-full flex flex-col gap-12 p-10">
 
-        <div className="flex justify-between  w-full">
-        <div className="flex flex-col gap-5 ">
-            <p className="text-xl font-semibold ">Breakfast</p>
-            <p>Items</p>
-            <input
-              type="text"
-              name="breakfast"
-              placeholder="Breakfast items (comma separated)"
-              className="border p-2"
-              value={menu.breakfast.items.join(",")}
-              onChange={(e) => setMenu({
-                ...menu,
-                breakfast : {
-                    ...menu.breakfast,
-                    items : e.target.value.split(",")
-                }
-              })}
-            />
-            <p>Start Time</p>
-            <input
-              type="time"
-              step="60"
-              name="startTime"
-              placeholder="Enter Start Time"
-              className="border p-2"
-              value={menu.breakfast.startTime}
-              onChange={(e) => setMenu({
-                ...menu,
-                breakfast : {
-                    ...menu.breakfast,
-                    startTime : e.target.value
-                }
-              })}
-            />
-            <p>End Time</p>
-            <input
-              type="time"
-              step="60"
-              name="endTime"
-              placeholder="Enter End Time"
-              className="border p-2"
-              value={menu.breakfast.endTime}
-              onChange={(e) => 
-                setMenu({
-                    ...menu,
-                    breakfast : {
-                        ...menu.breakfast,
-                        endTime : e.target.value
-                    }
-                })
-              }
-            />
-          </div>
-          <div className="flex flex-col gap-5">
-            <p className="text-xl font-semibold ">Lunch</p>
-            <p>Items</p>
-            <input
-              type="text"
-              
-              name="breakfast"
-              placeholder="Lunch items (comma separated)"
-              className="border p-2"
-              value={menu.lunch.items.join(",")}
-              onChange={(e) => setMenu({
-                ...menu,
-                lunch : {
-                    ...menu.lunch,
-                    items : e.target.value.split(",")
-                }
-              })}
-            />
-            <p>Start Time</p>
-            <input
-              type="time"
-              step="60"
-              name="startTime"
-              placeholder="Enter Start Time"
-              className="border p-2"
-              value={menu.lunch.startTime}
-              onChange={(e) => setMenu({
-                ...menu,
-                lunch : {
-                    ...menu.lunch,
-                    startTime : e.target.value
-                }
-              })}
-            />
-            <p>End Time</p>
-            <input
-              type="time"
-              step="60"
-              name="endTime"
-              placeholder="Enter End Time"
-              className="border p-2"
-              value={menu.lunch.endTime}
-              onChange={(e) => setMenu({
-                ...menu,
-                lunch : {
-                    ...menu.lunch,
-                    endTime : e.target.value
-                }
-              })}
-            />
-          </div>
-          <div className="flex flex-col gap-5">
-            <p className="text-xl font-semibold ">Dinner</p>
-            <p>Items</p>
-            <input
-              type="text"
-              name="breakfast"
-              placeholder="Dinner items (comma separated)"
-              className="border p-2"
-              value={menu.dinner.items.join(",")}
-              onChange={(e) => setMenu({
-                ...menu,
-                dinner : {
-                    ...menu.dinner,
-                    items : e.target.value.split(",")
-                }
-              })}
-            />
-            <p>Start Time</p>
-            <input
-              type="time"
-              step="60"
-              name="startTime"
-              placeholder="Enter Start Time"
-              className="border p-2"
-              value={menu.dinner.startTime}
-              onChange={(e) => setMenu({
-                ...menu,
-                dinner : {
-                    ...menu.dinner,
-                    startTime : e.target.value
-                }
-              })}
-            />
-            <p>End Time</p>
-            <input
-              type="time"
-              step="60"
-              name="endTime"
-              placeholder="Enter End Time"
-              className="border p-2"
-              value={menu.dinner.endTime}
-              onChange={(e) => setMenu({
-                ...menu,
-                dinner : {
-                    ...menu.dinner,
-                    endTime : e.target.value
-                }
-              })}
-            />
-          </div>
-          
-        </div>
-        <div>
-            <button className="bg-indigo-500 hover:bg-indigo-400 text-white p-2 text-sm font-bold cursor-pointer" onClick={handleSetMenu}>{Loading ? "Setting Menu..." : "Set Menu"}</button>
-          </div>
-        </div>
+{/* HEADER */}
+<div className="flex flex-col items-center gap-2">
+  <h1 className="text-3xl font-bold text-indigo-500">Mess Menu Setup</h1>
+  <p className="text-zinc-500 text-lg">
+  Configure the daily menu and meal timings for your mess
+  </p>
+</div>
+
+
+{/* MEAL CARDS */}
+<div className="grid grid-cols-3 gap-8 w-full">
+
+
+  {/* BREAKFAST */}
+  <div className="bg-white border border-indigo-500 shadow-md  rounded-xl p-6 flex flex-col gap-5">
+
+    <h2 className="text-xl font-semibold text-orange-500">
+      🍳 Breakfast
+    </h2>
+
+    <div className="flex flex-col gap-1">
+      <label className="text-sm text-zinc-500">Items</label>
+      <input
+        type="text"
+        placeholder="Poha, Upma, Tea"
+        className="border border-zinc-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+        value={menu.breakfast.items.join(",")}
+        onChange={(e) =>
+          setMenu({
+            ...menu,
+            breakfast: {
+              ...menu.breakfast,
+              items: e.target.value.split(","),
+            },
+          })
+        }
+      />
+    </div>
+
+    <div className="flex gap-4">
+      <div className="flex flex-col w-full">
+        <label className="text-sm text-zinc-500">Start Time</label>
+        <input
+          type="time"
+          step="60"
+          className="border border-zinc-400 rounded-md p-2"
+          value={menu.breakfast.startTime}
+          onChange={(e) =>
+            setMenu({
+              ...menu,
+              breakfast: {
+                ...menu.breakfast,
+                startTime: e.target.value,
+              },
+            })
+          }
+        />
+      </div>
+
+      <div className="flex flex-col w-full">
+        <label className="text-sm text-zinc-500">End Time</label>
+        <input
+          type="time"
+          step="60"
+          className="border border-zinc-400 rounded-md p-2"
+          value={menu.breakfast.endTime}
+          onChange={(e) =>
+            setMenu({
+              ...menu,
+              breakfast: {
+                ...menu.breakfast,
+                endTime: e.target.value,
+              },
+            })
+          }
+        />
+      </div>
+    </div>
+  </div>
+
+
+  {/* LUNCH */}
+  <div className="bg-white shadow-md border border-indigo-500 rounded-xl p-6 flex flex-col gap-5">
+
+    <h2 className="text-xl font-semibold text-green-600">
+      🍛 Lunch
+    </h2>
+
+    <div className="flex flex-col gap-1">
+      <label className="text-sm text-zinc-500">Items</label>
+      <input
+        type="text"
+        placeholder="Dal, Rice, Roti, Sabji"
+        className="border border-zinc-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+        value={menu.lunch.items.join(",")}
+        onChange={(e) =>
+          setMenu({
+            ...menu,
+            lunch: {
+              ...menu.lunch,
+              items: e.target.value.split(","),
+            },
+          })
+        }
+      />
+    </div>
+
+    <div className="flex gap-4">
+      <div className="flex flex-col w-full">
+        <label className="text-sm text-zinc-500">Start Time</label>
+        <input
+          type="time"
+          step="60"
+          className="border border-zinc-400 rounded-md p-2"
+          value={menu.lunch.startTime}
+          onChange={(e) =>
+            setMenu({
+              ...menu,
+              lunch: {
+                ...menu.lunch,
+                startTime: e.target.value,
+              },
+            })
+          }
+        />
+      </div>
+
+      <div className="flex flex-col w-full">
+        <label className="text-sm text-zinc-500">End Time</label>
+        <input
+          type="time"
+          step="60"
+          className="border border-zinc-400 rounded-md p-2"
+          value={menu.lunch.endTime}
+          onChange={(e) =>
+            setMenu({
+              ...menu,
+              lunch: {
+                ...menu.lunch,
+                endTime: e.target.value,
+              },
+            })
+          }
+        />
+      </div>
+    </div>
+  </div>
+
+
+  {/* DINNER */}
+  <div className="bg-white shadow-md border border-indigo-500 rounded-xl p-6 flex flex-col gap-5">
+
+    <h2 className="text-xl font-semibold text-purple-600">
+      🍽 Dinner
+    </h2>
+
+    <div className="flex flex-col gap-1">
+      <label className="text-sm text-zinc-500">Items</label>
+      <input
+        type="text"
+        placeholder="Paneer, Roti, Rice"
+        className="border border-zinc-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+        value={menu.dinner.items.join(",")}
+        onChange={(e) =>
+          setMenu({
+            ...menu,
+            dinner: {
+              ...menu.dinner,
+              items: e.target.value.split(","),
+            },
+          })
+        }
+      />
+    </div>
+
+    <div className="flex gap-4">
+      <div className="flex flex-col w-full">
+        <label className="text-sm text-zinc-500">Start Time</label>
+        <input
+          type="time"
+          step="60"
+          className="border border-zinc-400 rounded-md p-2"
+          value={menu.dinner.startTime}
+          onChange={(e) =>
+            setMenu({
+              ...menu,
+              dinner: {
+                ...menu.dinner,
+                startTime: e.target.value,
+              },
+            })
+          }
+        />
+      </div>
+
+      <div className="flex flex-col w-full">
+        <label className="text-sm text-zinc-500">End Time</label>
+        <input
+          type="time"
+          step="60"
+          className="border border-zinc-400 rounded-md p-2"
+          value={menu.dinner.endTime}
+          onChange={(e) =>
+            setMenu({
+              ...menu,
+              dinner: {
+                ...menu.dinner,
+                endTime: e.target.value,
+              },
+            })
+          }
+        />
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+{/* BUTTON */}
+<div className="flex justify-center">
+  <button
+    className="bg-indigo-600 w-1/2 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-semibold transition"
+    onClick={handleSetMenu}
+  >
+    {Loading ? "Setting Menu..." : "Set Menu"}
+  </button>
+</div>
+
+</div>
       </>
     );
 

@@ -35,31 +35,70 @@ const MessList = () => {
   return (
     <>
     
-      <div>
-        <p className="text-3xl font-semibold text-indigo-500 mx-15 sm:mx-26 mt-10">Messes Near You</p>
+    <div className="max-w-7xl mx-auto lg:px-12 mt-12">
+
+  {/* SECTION TITLE */}
+  <p className="text-3xl font-bold text-indigo-600 mb-10">
+    Messes Near You
+  </p>
+
+  {/* GRID */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    {messes.map((m) => (
+
+      <div
+        key={m._id}
+        className="bg-white border border-zinc-300 rounded-xl shadow-sm hover:shadow-lg transition p-6 flex flex-col justify-between"
+      >
+
+        {/* TOP SECTION */}
+        <div className="flex justify-between items-start">
+
+          <div>
+            <p className="text-lg font-semibold text-zinc-800">
+              {m.name}
+            </p>
+
+            <p className="text-xs text-zinc-500 mt-1">
+              Owner: {m.owner.name}
+            </p>
+          </div>
+
+          <span className="bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full font-semibold">
+            Available
+          </span>
+
+        </div>
+
+
+        {/* ADDRESS */}
+        <div className="mt-4 flex items-start gap-2 text-sm text-zinc-600">
+
+          <span>📍</span>
+
+          <p className="leading-snug">
+            {m.address}
+          </p>
+
+        </div>
+
+
+        {/* BUTTON */}
+        <button
+          onClick={() => handleJoinMess(m._id)}
+          className="mt-6 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-2 rounded-lg transition"
+        >
+          Join Mess
+        </button>
+
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-10  mt-10 mx-26">
-        {messes.map((m) => (
-          <div className="bg-indigo-200 p-10 rounded-2xl" key={m._id}>
-            <div className="flex justify-between items-center ">
-              <p className="text-xl font-semibold">{m.name}</p>
-              <p className="text-sm text-teal-500 font-bold">{m.owner.name}</p>
-            </div>
-            <div className="flex justify-between items-center mt-3">
-              <p className="font-semibold">Address</p>
-              <p className="font-bold text-sm">{m.address}</p>
-            </div>
-            <div className="">
-              <button className="rounded-2xl text-sm font-bold cursor-pointer bg-indigo-500 hover:bg-indigo-400 text-white px-3 py-1 mt-7" onClick={() => {
-                handleJoinMess(m._id)
-              }}>
-                Join Mess
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+    ))}
+
+  </div>
+
+</div>
     </>
   );
 };

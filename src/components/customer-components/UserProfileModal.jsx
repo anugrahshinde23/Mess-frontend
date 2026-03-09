@@ -78,96 +78,141 @@ const UserProfileModal = ({ onClose, handleLogout }) => {
   /* ------------------ UI ------------------ */
   return (
     <div className="fixed inset-0 z-50 flex justify-end backdrop-blur-sm">
+  
+      {/* Overlay */}
       <div
-        className="absolute inset-0 bg-black opacity-25"
+        className="absolute inset-0 bg-black/30"
         onClick={onClose}
       ></div>
-
-      <div className="relative bg-white w-2/3 sm:w-1/4 p-10 rounded-tl-xl rounded-bl-xl shadow-lg border border-indigo-500">
-        <div className="flex justify-between">
-          <p className="text-3xl font-bold text-indigo-500">Profile</p>
-          <p className="cursor-pointer font-bold" onClick={onClose}>
-            X
-          </p>
+  
+      {/* Modal */}
+      <div className="relative bg-white w-full sm:w-[380px] h-full p-6 shadow-2xl border-l border-zinc-200 flex flex-col">
+  
+        {/* Header */}
+        <div className="flex justify-between items-center pb-4 border-b">
+          <h2 className="text-2xl font-bold text-indigo-600">
+            Profile
+          </h2>
+  
+          <button
+            onClick={onClose}
+            className="text-zinc-500 hover:text-black text-lg font-bold"
+          >
+            ✕
+          </button>
         </div>
-
-        <div className="mt-5">
-          <p className="text-xl font-semibold">{user.name}</p>
-          <p className="text-sm">{user.phone}</p>
+  
+        {/* User Info */}
+        <div className="mt-6 bg-indigo-50 rounded-xl p-4 flex flex-col gap-1">
+          <p className="text-lg font-semibold">{user.name}</p>
+          <p className="text-sm text-zinc-600">{user.phone}</p>
         </div>
-
-        <div
-          className="mt-20 bg-red-500 text-white text-center p-2 cursor-pointer font-bold"
-          onClick={handleLogout}
-        >
-          Logout
-        </div>
-
-        {/* -------- Subscription -------- */}
-        <div className="mt-6">
-          <p className="text-2xl font-bold text-indigo-500">
-            Subscription Detail
-          </p>
-
+  
+  
+        {/* Subscription Section */}
+        <div className="mt-8">
+  
+          <h3 className="text-lg font-semibold text-zinc-700 mb-2">
+            Subscription
+          </h3>
+  
           {currentSubscription ? (
-            <div className="border p-4 mt-2">
-              <p>Status: {currentSubscription.status}</p>
-              <p>Start: {formatDate(currentSubscription.startDate)}</p>
-              <p>End: {formatDate(currentSubscription.endDate)}</p>
-
+            <div className="border rounded-xl p-4 flex flex-col gap-2 bg-white shadow-sm">
+  
+              <p className="text-sm">
+                <span className="font-semibold">Status:</span>{" "}
+                <span className="text-indigo-600 font-semibold">
+                  {currentSubscription.status}
+                </span>
+              </p>
+  
+              <p className="text-sm">
+                <span className="font-semibold">Start:</span>{" "}
+                {formatDate(currentSubscription.startDate)}
+              </p>
+  
+              <p className="text-sm">
+                <span className="font-semibold">End:</span>{" "}
+                {formatDate(currentSubscription.endDate)}
+              </p>
+  
               {timeLeft ? (
-                <div className=" flex flex-col gap-3 font-bold mt-2">
-                  {" "}
-                  {currentSubscription.status === "PENDING"
-                    ? "Starts in"
-                    : <p className="text-lg">Ends In</p>}
-                    {" "}
+                <div className="mt-3">
+  
+                  <p className="font-semibold text-center text-zinc-600 mb-2">
+                    {currentSubscription.status === "PENDING"
+                      ? "Starts In"
+                      : "Ends In"}
+                  </p>
+  
                   <div className="grid grid-cols-4 gap-2 text-center">
-                  <div className="bg-indigo-500 p-2 text-white">
-                  {timeLeft.days}
-                  <p>Days</p>
-                    </div> 
-                    <div className="bg-indigo-500 p-2 text-white">
-                    {timeLeft.hours}
-                    <p>Hour</p>
-                      </div>{" "}
-                  <div className="bg-indigo-500 p-2 text-white">
-                  {timeLeft.minutes}
-                  <p>Min</p>
-                    </div> 
-                    <div className="bg-indigo-500 p-2 text-white">
-                    {timeLeft.seconds}
-                    <p>Sec</p>
+  
+                    <div className="bg-indigo-600 text-white rounded-lg p-2">
+                      <p className="text-lg font-bold">{timeLeft.days}</p>
+                      <p className="text-xs">Days</p>
                     </div>
-                </div>
+  
+                    <div className="bg-indigo-600 text-white rounded-lg p-2">
+                      <p className="text-lg font-bold">{timeLeft.hours}</p>
+                      <p className="text-xs">Hours</p>
+                    </div>
+  
+                    <div className="bg-indigo-600 text-white rounded-lg p-2">
+                      <p className="text-lg font-bold">{timeLeft.minutes}</p>
+                      <p className="text-xs">Min</p>
+                    </div>
+  
+                    <div className="bg-indigo-600 text-white rounded-lg p-2">
+                      <p className="text-lg font-bold">{timeLeft.seconds}</p>
+                      <p className="text-xs">Sec</p>
+                    </div>
+  
                   </div>
+                </div>
               ) : (
-                <p className="text-red-500 font-bold">
-                  ❌ Subscription expired
+                <p className="text-red-500 font-semibold mt-2 text-center">
+                  Subscription expired
                 </p>
               )}
             </div>
           ) : (
-            <p className="text-gray-500 mt-2">
+            <p className="text-sm text-zinc-500">
               No active or upcoming subscription
             </p>
           )}
         </div>
-
-        {/* -------- NAV BUTTONS -------- */}
-        <div
-          className="mt-8 bg-indigo-500 p-2 cursor-pointer text-center text-white font-bold"
-          onClick={() => navigate("/order-history-customer")}
-        >
-          Orders
+  
+  
+        {/* Navigation Buttons */}
+        <div className="mt-8 flex flex-col gap-3">
+  
+          <button
+            onClick={() => navigate("/order-history-customer")}
+            className="bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg font-semibold transition"
+          >
+            View Orders
+          </button>
+  
+          <button
+            onClick={() => navigate("/payment-history-customer")}
+            className="bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg font-semibold transition"
+          >
+            Payment History
+          </button>
+  
         </div>
-
-        <div
-          className="mt-4 bg-indigo-500 p-2 cursor-pointer text-center text-white font-bold"
-          onClick={() => navigate("/payment-history-customer")}
-        >
-          Payments
+  
+  
+        {/* Logout */}
+        <div className="mt-auto pt-6">
+          <button
+            onClick={handleLogout}
+            className="w-full bg-red-500 hover:bg-red-400 text-white py-2 rounded-lg font-semibold transition"
+          >
+            Logout
+          </button>
         </div>
+  
       </div>
     </div>
   );

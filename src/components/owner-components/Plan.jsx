@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { addPlanToMessApi, getAllPlansApi, removePlanFromMessApi } from "../../services/plan.services";
+import {
+  addPlanToMessApi,
+  getAllPlansApi,
+  removePlanFromMessApi,
+} from "../../services/plan.services";
 import { toast } from "react-toastify";
 import PlanPriceModal from "./PlanPriceModal";
+import { MdCheckBoxOutlineBlank, MdCheckCircle, MdCheckCircleOutline } from "react-icons/md";
+
 
 const Plan = ({ messData, handleGetMessData }) => {
   const [isActive, setIsActive] = useState(false);
@@ -60,19 +66,17 @@ const Plan = ({ messData, handleGetMessData }) => {
   const isPlanAdded = (planId) => {
     return messData?.messData?.plan?.some((p) => p.plan === planId);
   };
-  
 
   const handelRemovePlanFromMess = async (planId) => {
     try {
-        const res = await removePlanFromMessApi(planId)
-        console.log(res);
-        toast.success(res.message)
-        handleGetMessData()
-        
+      const res = await removePlanFromMessApi(planId);
+      console.log(res);
+      toast.success(res.message);
+      handleGetMessData();
     } catch (error) {
-        toast.error("Failed to remove plan from mess")
+      toast.error("Failed to remove plan from mess");
     }
-  }
+  };
 
   useEffect(() => {
     handleGetAllPlans();
@@ -81,40 +85,65 @@ const Plan = ({ messData, handleGetMessData }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 p-20 h-full ">
+      <div className="grid grid-cols-1 items-center h-full sm:grid-cols-2 lg:grid-cols-4  gap-10 px-15 py-10  ">
         {plans?.plansData.map((plan) => (
-          <div key={plan._id} className="border border-zinc-400 p-10">
-            
-            <p className="text-3xl text-center font-bold">{plan.type}</p>
-            <div className="flex justify-between mt-5">
-              <p className="text-xl font-semibold ">Duration:</p>
-              <p className="text-xl ">{plan.durationInDays}</p>
+          <div
+            key={plan._id}
+            className="border-2 bg-white flex flex-col gap-10 rounded-2xl border-indigo-400 p-10"
+          >
+            <div className="flex flex-col gap-2">
+              <p className="text-3xl font-bold">
+                {plan.type.replace("_", " ")}
+              </p>
+              <p className="text-sm text-zinc-400">
+                {plan.type === "ONE_TIME"
+                  ? "For one time order"
+                  : plan.type === "MONTHLY"
+                  ? "For monthly subscription"
+                  : plan.type === "WEEKLY"
+                  ? "For weekly subscription"
+                  : plan.type === "ONE_DAY"
+                  ? "For one full day"
+                  : null}
+              </p>
+              {isPlanAdded(plan._id) ? (
+                <p className="text-xl font-semibold">
+                  Rs.{" "}
+                  {
+                    messData?.messData?.plan?.find((p) => p.plan === plan._id)
+                      ?.price
+                  }
+                </p>
+              ) : (
+                <p className="text-xl font-semibold">Not decided</p>
+              )}
             </div>
+            <div className="text-zinc-300 border-2  text-2xl"></div>
 
-            <div className="flex justify-between  mt-10">
-              <p className="text-xl font-semibold ">Meals:</p>
-              <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 justify-between">
+              <p className="font-medium ">What you get</p>
+              <div>
+                <div className=" text-zinc-400 flex items-center ">
+                <MdCheckCircleOutline/>
+                  <p>{plan.durationInDays} duration.</p>
+                  </div>
+
                 {plan?.mealsIncluded?.map((meal) => (
-                  <p className="">{meal}</p>
+                  <div  className="flex items-center text-zinc-400">
+                    <MdCheckCircleOutline/>
+                    <p>
+                    {meal}
+                    </p>
+                    
+                    
+                    </div>
                 ))}
               </div>
             </div>
 
-            {isPlanAdded(plan._id) && (
-  <p className="text-xl font-semibold">
-    Price:{" "}
-    {
-      messData?.messData?.plan
-        ?.find(p => p.plan === plan._id)
-        ?.price
-    }
-  </p>
-)}
-
-
-            <div className=" text-center mt-30">
+            <div>
               <button
-                className={`p-2 rounded-2xl text-white cursor-pointer text-sm font-bold
+                className={`p-2 rounded w-full text-white cursor-pointer text-sm font-bold
     ${
       isPlanAdded(plan._id)
         ? "bg-red-500 hover:bg-red-400"
@@ -123,8 +152,7 @@ const Plan = ({ messData, handleGetMessData }) => {
   `}
                 onClick={() => {
                   if (isPlanAdded(plan._id)) {
-                    handelRemovePlanFromMess(plan._id)
-                    
+                    handelRemovePlanFromMess(plan._id);
                   } else {
                     setSelectedPlanId(plan._id);
                     setIsActive(true);

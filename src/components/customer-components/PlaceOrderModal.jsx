@@ -89,14 +89,14 @@ const PlaceOrderModal = ({onClose, messId, oneTimePrice}) => {
           
         </div>
 
-<div className='flex gap-2 flex-col'>
-  <select value={selectedMeal} name="" id="" onChange={(e) => setSelectedMeal(e.target.value)} className='border mt-5'>
+<div className='flex gap-4 flex-col'>
+  <select  value={selectedMeal} name="" id="" onChange={(e) => setSelectedMeal(e.target.value)} className='border border-zinc-300 rounded p-2 mt-5'>
     <option value="breakfast">Breakfast</option>
     <option value="lunch">Lunch</option>
     <option value="dinner">Dinner</option>
   </select>
 
-  <button className='text-sm py-1 bg-indigo-500 text-white font-bold hover:bg-indigo-400 cursor-pointer' onClick={(e) => {
+  <button className='text-sm p-2 rounded bg-indigo-500 text-white font-bold hover:bg-indigo-400 cursor-pointer' onClick={(e) => {
     handlePlaceOrder(e)
   }}>
     Order

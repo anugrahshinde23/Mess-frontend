@@ -51,50 +51,81 @@ const NavBar = ( ) => {
   const { user } = useAuth();
 
   return (
-    <>
-      <div className="flex justify-between items-center px-15 sm:px-26 py-10  shadow-2xl">
-        <div>
-          <p className="text-2xl font-medium text-indigo-500">MessMate</p>
-        </div>
-        <div className="w-1/3 hidden lg:block ">
-          <input className="border w-full p-1" type="text" />
-        </div>
-        <div className="flex items-center gap-5 ">
-          <div className="flex gap-1 items-center">
-            <div>
-              <MaterialDesignIcons.MdNotifications
-                className="relative"
-                size={35}
-                color="#667eea"
-                onClick={() => {
-                  setOpenNotifyModal(true);
-                }}
-              />
-               {notification.some(n => n.isRead === false) && (
-                <div className='bg-red-500 px-2 py-0.5 absolute rounded-full top-10 text-white text-[10px]'>
-                    {notification.length}
-                </div>
-            )}
-            </div>
+<>
+  <div className="w-full bg-white shadow-md px-6 sm:px-12 lg:px-20 py-4 flex items-center justify-between">
 
-            {openNotifyModal && (
-              <NotificationModal
-                closeNotifyModal={closeNotifyModal}
-                notifications={notification}
-                handleMarkAsRead={handleMarkAsRead}
-              />
-            )}
+    {/* LOGO */}
+    <div>
+      <p className="text-2xl font-bold text-indigo-600 tracking-wide">
+        MessMate
+      </p>
+    </div>
 
-            <MaterialDesignIcons.MdPerson size={40} color="#667eea" />
+
+    {/* SEARCH BAR */}
+    <div className="w-1/3 hidden lg:block">
+      <input
+        type="text"
+        placeholder="Search mess or food..."
+        className="w-full border border-zinc-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      />
+    </div>
+
+
+    {/* RIGHT SECTION */}
+    <div className="flex items-center gap-6">
+
+      {/* NOTIFICATION */}
+      <div className="relative cursor-pointer">
+
+        <MaterialDesignIcons.MdNotifications
+          size={28}
+          color="#6366f1"
+          onClick={() => setOpenNotifyModal(true)}
+        />
+
+        {notification.some((n) => n.isRead === false) && (
+          <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+            {notification.length}
           </div>
-          <div className="flex flex-col hidden sm:block">
-            <p className="text-sm font-bold">{user.name}</p>
-            <p className="text-sm font-bold">{user.phone}</p>
-          </div>
-          
-        </div>
+        )}
+
       </div>
-    </>
+
+
+      {/* PROFILE */}
+      <div className="flex items-center gap-3 cursor-pointer">
+
+        <div className="w-9 h-9 rounded-full bg-indigo-500 text-white flex items-center justify-center font-semibold">
+          {user?.name?.[0]}
+        </div>
+
+        <div className="hidden sm:flex flex-col leading-tight">
+          <p className="text-sm font-semibold text-zinc-800">
+            {user.name}
+          </p>
+          <p className="text-xs text-zinc-500">
+            {user.phone}
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    {/* NOTIFICATION MODAL */}
+    {openNotifyModal && (
+      <NotificationModal
+        closeNotifyModal={closeNotifyModal}
+        notifications={notification}
+        handleMarkAsRead={handleMarkAsRead}
+      />
+    )}
+
+  </div>
+</>
   );
 };
 
