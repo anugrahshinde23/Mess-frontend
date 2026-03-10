@@ -34,16 +34,21 @@ const NotFound = () => {
 
       {/* 3. The Text Content */}
       <div className="relative z-20 text-center text-white px-4">
-        <h1 className="text-5xl md:text-7xl font-bold mb-4">
+        <h1 className="text-5xl md:text-7xl font-bold  mb-7">
           You Got, <span className="text-indigo-400">Lost.</span>
         </h1>
-        <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl mb-8 max-w-2xl font-mono mx-auto">
           It seem like something went wrong we can't find what you are looking for Let's bring you back to the
           place we know
         </p>
-        <button onClick={navigateToHome} className="px-8 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-full font-semibold transition-all cursor-pointer">
+        <div className='flex gap-4 justify-center'>
+        <button onClick={navigateToHome} className="px-8 py-3 border border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white rounded font-semibold transition-all cursor-pointer">
           Go Back
         </button>
+        <button onClick={navigateToHome} className="px-8 py-3 bg-indigo-500 hover:bg-indigo-600 rounded font-semibold transition-all cursor-pointer">
+          Back To Home
+        </button>
+        </div>
       </div>
     </div>
 

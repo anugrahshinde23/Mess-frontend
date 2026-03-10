@@ -23,6 +23,7 @@ import TargetCursor from './utils/TargetCursor';
 import VerityChatPage from './pages/VerityChatPage';
 import VerityChatButton from './components/verity-components/VerityChatButton';
 import NotFound from './utils/NotFound';
+import AboutUs from './components/home-components/AboutUs';
 
 
 
@@ -76,6 +77,7 @@ const App = () => {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/admin-dashboard" element={<RoleProtectedRoutes allowedRoles={["ADMIN"]}><AdminDashboard /></RoleProtectedRoutes>} />
             <Route path='/verity' element={<ProtectedRoutes><VerityChatPage/></ProtectedRoutes>}/>
+            <Route path='/aboutus' element={<AboutUs/>} />
             <Route path='*' element={<NotFound/>} />
           </Routes>
           <VerityChatButton/>
