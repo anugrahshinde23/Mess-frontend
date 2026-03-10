@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useCallback, useMemo, useState } from 'react';
 import { gsap } from 'gsap';
 
 const TargetCursor = ({
@@ -8,6 +8,9 @@ const TargetCursor = ({
   hoverDuration = 0.2,
   parallaxOn = true
 }) => {
+  // 1. STATE MUST BE INSIDE THE COMPONENT
+  const [isDarkBg, setIsDarkBg] = useState(false);
+
   const cursorRef = useRef(null);
   const cornersRef = useRef(null);
   const spinTl = useRef(null);
@@ -114,7 +117,15 @@ const TargetCursor = ({
 
     tickerFnRef.current = tickerFn;
 
-    const moveHandler = e => moveCursor(e.clientX, e.clientY);
+    const moveHandler = e => {
+      moveCursor(e.clientX, e.clientY);
+      
+      // OPTIONAL: Continuous check for background color if not hovering a specific target
+      const element = document.elementFromPoint(e.clientX, e.clientY);
+      if (element) {
+        setIsDarkBg(!!element.closest('.bg-indigo-500'));
+      }
+    };
     window.addEventListener('mousemove', moveHandler);
 
     const scrollHandler = () => {
@@ -150,6 +161,11 @@ const TargetCursor = ({
 
     const enterHandler = e => {
       const directTarget = e.target;
+      
+      // Update color based on background
+      const overIndigo = !!directTarget.closest('.bg-indigo-500');
+      setIsDarkBg(overIndigo);
+
       const allTargets = [];
       let current = directTarget;
       while (current && current !== document.body) {
@@ -203,6 +219,9 @@ const TargetCursor = ({
       });
 
       const leaveHandler = () => {
+        // Reset color when leaving a target if no longer over indigo
+        setIsDarkBg(false);
+
         gsap.ticker.remove(tickerFnRef.current);
         isActiveRef.current = false;
         targetCornerPositionsRef.current = null;
@@ -284,6 +303,10 @@ const TargetCursor = ({
     return null;
   }
 
+  // --- STRICTLY WHITE LOGIC IN RETURN ---
+  const cursorColorClass = isDarkBg ? 'bg-white' : 'bg-indigo-500';
+  const borderColorClass = isDarkBg ? 'border-white' : 'border-indigo-500';
+
   return (
     <div
       ref={cursorRef}
@@ -292,23 +315,23 @@ const TargetCursor = ({
     >
       <div
         ref={dotRef}
-        className="absolute top-1/2 left-1/2 w-1 h-1 bg-indigo-500 rounded-full -translate-x-1/2 -translate-y-1/2"
+        className={`absolute top-1/2 left-1/2 w-1 h-1 rounded-full -translate-x-1/2 -translate-y-1/2 transition-colors duration-200 ${cursorColorClass}`}
         style={{ willChange: 'transform' }}
       />
       <div
-        className="target-cursor-corner absolute top-1/2 left-1/2 w-3 h-3 border-[3px] border-indigo-500 -translate-x-[150%] -translate-y-[150%] border-r-0 border-b-0"
+        className={`target-cursor-corner absolute top-1/2 left-1/2 w-3 h-3 border-[3px] -translate-x-[150%] -translate-y-[150%] border-r-0 border-b-0 transition-colors duration-200 ${borderColorClass}`}
         style={{ willChange: 'transform' }}
       />
       <div
-        className="target-cursor-corner absolute top-1/2 left-1/2 w-3 h-3 border-[3px] border-indigo-500 translate-x-1/2 -translate-y-[150%] border-l-0 border-b-0"
+        className={`target-cursor-corner absolute top-1/2 left-1/2 w-3 h-3 border-[3px] translate-x-1/2 -translate-y-[150%] border-l-0 border-b-0 transition-colors duration-200 ${borderColorClass}`}
         style={{ willChange: 'transform' }}
       />
       <div
-        className="target-cursor-corner absolute top-1/2 left-1/2 w-3 h-3 border-[3px] border-indigo-500 translate-x-1/2 translate-y-1/2 border-l-0 border-t-0"
+        className={`target-cursor-corner absolute top-1/2 left-1/2 w-3 h-3 border-[3px] translate-x-1/2 translate-y-1/2 border-l-0 border-t-0 transition-colors duration-200 ${borderColorClass}`}
         style={{ willChange: 'transform' }}
       />
       <div
-        className="target-cursor-corner absolute top-1/2 left-1/2 w-3 h-3 border-[3px] border-indigo-500 -translate-x-[150%] translate-y-1/2 border-r-0 border-t-0"
+        className={`target-cursor-corner absolute top-1/2 left-1/2 w-3 h-3 border-[3px] -translate-x-[150%] translate-y-1/2 border-r-0 border-t-0 transition-colors duration-200 ${borderColorClass}`}
         style={{ willChange: 'transform' }}
       />
     </div>
