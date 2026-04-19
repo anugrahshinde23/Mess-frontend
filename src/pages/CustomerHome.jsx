@@ -27,8 +27,8 @@ const CustomerHome = () => {
         setTimeout(() => {
             navigate('/')
         }, 1500);
-    } catch (err) {
-        toast.error("Failed to logout")
+    } catch (error) {
+        toast.error(error.response?.data?.message)
     }
    }
 

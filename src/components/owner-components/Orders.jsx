@@ -105,6 +105,13 @@ const Orders = ({ messData, fetchSubscriptions,subscriptions, order , handleGetO
     fetchSubscriptions(activeTab);
   };
 
+
+  if(!messData){
+     return <div className='flex justify-center items-center h-full'>
+    <p className='text-2xl font-bold text-zinc-500'>Mess is deactivated cannot access Orders</p>
+  </div>
+  }
+
   return (
     <div className="p-10 ">
       <p className="text-3xl font-bold text-indigo-500 mb-5">Subscriptions</p>

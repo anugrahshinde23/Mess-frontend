@@ -14,6 +14,18 @@ const Navbar = () => {
     navigate('/aboutus')
    }
 
+   const redirectToContactUs = () => {
+    console.log("contact us button clicked");
+    
+    navigate('/contact-us')
+    console.log("contact us clicked again");
+    
+   }
+
+   const redirectToHowItWorks = () => {
+    navigate('/how-messmate-works')
+   }
+
    const { user } = useAuth()
 
 
@@ -27,9 +39,9 @@ const Navbar = () => {
 
         <div className='border cursor-pointer animate__animated  animate__rubberBand hidden md:block border-indigo-500 md:px-5 md:py-1 lg:px-10 lg:py-3 rounded-full hover:bg-indigo-500 hover:text-white hover:border-white' >
             <ul className='flex md:gap-7 lg:gap-15 md:text-[11px] lg:text-sm font-bold ' >
-                <li className='cursor-pointer' onClick={redirectToAboutUs}>About Us</li>
-                <li className='cursor-pointer'>Contact Us</li>
-                <li className='cursor-pointer' >How it works?</li>
+                <li id='aboutus-btn' className='cursor-pointer' onClick={redirectToAboutUs}>About Us</li>
+                <li id='contactus-btn' className='cursor-pointer' onClick={redirectToContactUs} >Contact Us</li>
+                <li className='cursor-pointer' onClick={redirectToHowItWorks} >How it works?</li>
             </ul>
         </div>
 

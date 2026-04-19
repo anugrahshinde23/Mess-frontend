@@ -75,6 +75,10 @@ const UserProfileModal = ({ onClose, handleLogout }) => {
     handleGetOrderHistory();
   }, []);
 
+  useEffect(() => {
+    window.closeCustomerProfileModal = onClose
+  }, [onClose])
+
   /* ------------------ UI ------------------ */
   return (
     <div className="fixed inset-0 z-50 flex justify-end backdrop-blur-sm">
@@ -103,14 +107,14 @@ const UserProfileModal = ({ onClose, handleLogout }) => {
         </div>
   
         {/* User Info */}
-        <div className="mt-6 bg-indigo-50 rounded-xl p-4 flex flex-col gap-1">
+        <div id="customer-info" className="mt-6 bg-indigo-50 rounded-xl p-4 flex flex-col gap-1">
           <p className="text-lg font-semibold">{user.name}</p>
           <p className="text-sm text-zinc-600">{user.phone}</p>
         </div>
   
   
         {/* Subscription Section */}
-        <div className="mt-8">
+        <div id="customer-subs-info" className="mt-8">
   
           <h3 className="text-lg font-semibold text-zinc-700 mb-2">
             Subscription
@@ -187,6 +191,7 @@ const UserProfileModal = ({ onClose, handleLogout }) => {
         <div className="mt-8 flex flex-col gap-3">
   
           <button
+          id="customer-order-history-btn"
             onClick={() => navigate("/order-history-customer")}
             className="bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg font-semibold transition"
           >
@@ -194,6 +199,7 @@ const UserProfileModal = ({ onClose, handleLogout }) => {
           </button>
   
           <button
+          id="customer-payment-history-btn"
             onClick={() => navigate("/payment-history-customer")}
             className="bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg font-semibold transition"
           >
@@ -206,6 +212,7 @@ const UserProfileModal = ({ onClose, handleLogout }) => {
         {/* Logout */}
         <div className="mt-auto pt-6">
           <button
+          id="customer-logout-btn"
             onClick={handleLogout}
             className="w-full bg-red-500 hover:bg-red-400 text-white py-2 rounded-lg font-semibold transition"
           >

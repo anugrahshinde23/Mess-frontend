@@ -58,8 +58,17 @@ useEffect(() => {
 
 handleGetTotalSubscription()
 handleGetDboys()
+console.log(messData?.messData?.isActive)
  
 }, [])
+
+
+if (!messData){
+
+  return <div className='flex justify-center items-center h-full'>
+    <p className='text-2xl font-bold text-zinc-500'>Mess is deactivated cannot access Dashboard</p>
+  </div>
+}
 
 
   return (

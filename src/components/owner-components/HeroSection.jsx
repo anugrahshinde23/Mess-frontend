@@ -9,6 +9,7 @@ import Dashboard from './Dashboard'
 import { toast } from 'react-toastify'
 import { getSubscriptionByStatusApi } from '../../services/subscription.services'
 import { getOrdersApi } from '../../services/order.services'
+import Wallet from './Wallet'
 
 const HeroSection = ({activeTab, messData, handleGetMessData, showUpdateModal, setShowUpdateModal, handleLogout }) => {
 
@@ -57,9 +58,10 @@ const HeroSection = ({activeTab, messData, handleGetMessData, showUpdateModal, s
         {activeTab === 'tab2' && <Shop messData={messData} handleGetMessData={handleGetMessData} showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} />}
         {activeTab === 'tab3' && <Orders setStatus={setStatus} order={order} handleGetOrders={handleGetOrders}  subscriptions={subscriptions} fetchSubscriptions={fetchSubscriptions} handleGetMessData={handleGetMessData} messData={messData}/>}
         {activeTab === 'tab4' && <DeliveryBoy messData={messData} handleGetMessData={handleGetMessData}/>}
-        {activeTab === 'tab5' && <Menu/>}
+        {activeTab === 'tab5' && <Menu messData={messData}/>}
         {activeTab === 'tab6' && <Plan messData={messData} handleGetMessData={handleGetMessData}/>}
         {activeTab === 'tab7' && <Settings  handleLogout={handleLogout}/>}
+        {activeTab === 'tab8' && <Wallet  />}
     </div>
     
     </>

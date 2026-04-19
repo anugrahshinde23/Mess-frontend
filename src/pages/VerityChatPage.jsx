@@ -11,10 +11,11 @@ import LiquidEther from '../components/verity-components/VerityBackground';
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
 import verityGIF from '../assests/gif/verityGif.gif'
+import { generateImageApi } from '../services/image.services';
 
 
 
-const Puter = window.puter;
+
 const VerityChatPage = () => {
 
 
@@ -75,43 +76,7 @@ const VerityChatPage = () => {
 //   }, [messages]);
 
 
-const handlePuterImageGenerate = async () => {
-  if (!input.trim() || isLoading || !chatId) return;
 
-  // 1. Check if the SDK is ready
-  if (!window.puter) {
-    toast.error("Puter SDK is still loading...");
-    return;
-  }
-
-  const prompt = input;
-  setMessages(prev => [...prev, { role: "user", text: prompt }]);
-  setInput("");
-  setIsLoading(true);
-
-  try {
-    // 2. Use the correct v2 syntax: window.puter.ai.txt2img
-    const highQualityPrompt = `${prompt}, 4k resolution, cinematic lighting, highly detailed, masterpiece, digital art, sharp focus`;
-    const imageElement = await window.puter.ai.txt2img(highQualityPrompt);
-
-    // Puter v2 returns an <img> element or a source. 
-    // Usually, we want the src string:
-    const imageUrl = imageElement.src;
-
-    setMessages(prev => [
-      ...prev,
-      { role: "assistant", image: imageUrl, text: "Generated Image" }
-    ]);
-  } catch (err) {
-    console.error("Puter Error:", err);
-    setMessages(prev => [
-      ...prev,
-      { role: "assistant", text: "Failed to generate image. Please try again." }
-    ]);
-  } finally {
-    setIsLoading(false);
-  }
-};
 
 
 
@@ -363,6 +328,47 @@ useEffect(() => {
     //     }
     //   };
 
+    const handleImageGenerate = async () => {
+      if (!input.trim() || isLoading || !chatId) return;
+    
+      const prompt = input;
+    
+      setMessages(prev => [
+        ...prev,
+        { role: "user", text: prompt }
+      ]);
+    
+      setInput("");
+      setIsLoading(true);
+    
+      try {
+    
+        const res = await generateImageApi({prompt})
+    
+        setMessages(prev => [
+          ...prev,
+          {
+            role: "assistant",
+            image: res.imageURL,
+            text: "Generated Image"
+          }
+        ]);
+    
+      } catch (err) {
+        console.error(err);
+    
+        setMessages(prev => [
+          ...prev,
+          {
+            role: "assistant",
+            text: "Failed to generate image"
+          }
+        ]);
+      }
+    
+      setIsLoading(false);
+    };
+
 
     const handleRegenerate = async () => {
       if (isLoading || !chatId) return;
@@ -414,7 +420,7 @@ useEffect(() => {
     + New Chat
   </button>
   <button
-  onClick={handlePuterImageGenerate}
+  onClick={handleImageGenerate}
   disabled={isLoading || !input.trim()}
   className="bg-green-500 font-medium text-white p-2 rounded-lg disabled:bg-gray-200"
 >

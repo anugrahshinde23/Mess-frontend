@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { cancelOrderApi, getOrderHistoryApi } from "../services/order.services";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 const OrderHistoryPageCustomer = () => {
@@ -9,6 +10,8 @@ const OrderHistoryPageCustomer = () => {
   const [selectedOrder, setSelectedOrder] = useState("placed")
 
   const [orderHistory, setOrderHistory] = useState([])
+
+  const navigate = useNavigate()
 
   const handleCancelOrder = async (orderId) => {
     try {
@@ -60,7 +63,7 @@ const OrderHistoryPageCustomer = () => {
         <div>
           <p className="text-4xl font-bold text-indigo-500">Orders</p>
         </div>
-        <div className="border border-indigo-500 px-20 py-5  flex justify-between mt-10 cursor-pointer" >
+        <div id="customer-order-history-page" className="border border-indigo-500 px-20 py-5  flex justify-between mt-10 cursor-pointer" >
           {orderStatus.map((o)=>(
             <div key={o.id} className={`${selectedOrder === o.id ?'bg-indigo-500 px-3 py-2 text-white rounded-2xl text-sm font-bold cursor-pointer' : "hover:bg-zinc-400  px-3 py-2 text-sm font-bold rounded-2xl cursor-pointer" }`} onClick={() => {
               setSelectedOrder(o.id)
@@ -80,6 +83,7 @@ const OrderHistoryPageCustomer = () => {
                 <th className=" p-2">Status</th> 
                 <th className=" p-2">Shipping</th>
                 <th className=" p-2">Code</th>
+                <th className=" p-2">Payment</th>
                 <th className=" p-2">Action</th>
               </tr>
             </thead>
@@ -97,7 +101,7 @@ const OrderHistoryPageCustomer = () => {
 </div></td>
                   <td className="p-2 text-center">
                   {new Date(o.orderDate).toLocaleString("en-IN", {
-    timeZone: "UTC", // This will show 5:22 PM
+    timeZone: "Asia/Kolkata", // This will show 5:22 PM
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -109,11 +113,26 @@ const OrderHistoryPageCustomer = () => {
                   <td className=" p-2 text-center">{o.status}</td>
                   <td className=" p-2 text-center">{o.orderShippingType}</td>
                   <td className=" p-2 text-center">{o.orderCompleteCode}</td>
+                  <td className=" p-2 text-center">{o.payment === null && o.source === "NORMAL" ? (
+                    <button className="bg-indigo-500 px-2 py-1 text-sm rounded text-white  hover:bg-indigo-400 cursor-pointer " onClick={() => {
+                    navigate('/pay', {
+                     state : {
+                      orderId: o._id,
+                      amount : o.price,
+                      mealType: o.mealType,
+                      messId : o.mess._id
+                     }
+                    })
+                    } }>Pay</button>
+                  ) : (
+                    <button className="text-sm text-white bg-green-500 px-2 py-1  rounded" disabled={true} >Done</button>
+                  )}</td>
                   <td className="rounded-r-2xl p-2 text-center">
                     {selectedOrder === "placed" && (
                       <button className="bg-red-500 px-2 py-1 text-white font-bold text-sm cursor-pointer rounded-2xl hover:bg-red-400" onClick={() => {
                         handleCancelOrder(o._id)
                        }}>Cancel</button>
+                      
                     )}
                   </td>
                 </tr>

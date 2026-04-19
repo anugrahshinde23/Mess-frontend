@@ -1,84 +1,136 @@
-import React, { useEffect } from "react";
-import {  useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { createPaymentApi } from "../services/payment.services";
 import { toast } from "react-toastify";
+import { QRCodeSVG } from "qrcode.react"; // Install this: npm install qrcode.react
 
 const Payment = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [utrNumber, setUtrNumber] = useState("");
 
-  const { user } = useAuth()
+  const { messId, orderId, amount, mealType } = location.state || {};
+
+  // 1. Define Admin UPI Details
+  const adminUpiId = "9545548755@axl"; // Change this to your real Admin UPI ID
   
-
-  const { messId ,orderId, amount, mealType } = location.state || {};
+  // 2. Create the UPI Deep Link
+  // This is what opens the UPI apps automatically
+  const upiLink = `upi://pay?pa=${adminUpiId}&pn=MessMate&am=${amount}&cu=INR&tn=Order_${orderId}`;
 
   useEffect(() => {
-    if ( !messId || !orderId || !amount || !mealType) {
+    if (!messId || !orderId || !amount || !mealType) {
       navigate("/");
     }
-  }, [ messId, orderId, amount,mealType, navigate]);
+  }, [messId, orderId, amount, mealType, navigate]);
+
+  const handleCreatePayment = async () => {
+    if (utrNumber.length < 12) {
+      return toast.error("Please enter a valid 12-digit UTR number");
+    }
+    try {
+      const res = await createPaymentApi({ messId, orderId, amount, utrNumber });
+      toast.success("Payment submitted for Admin approval!");
+      navigate('/customer-home');
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Something went wrong");
+    }
+  };
 
   if (!messId || !orderId || !amount || !mealType) return null;
 
-
-  const handleCreatePayment = async() => {
-    try {
-      const res = await createPaymentApi({messId,orderId, amount})
-      console.log(res);
-      toast.success(res.message)
-      navigate('/customer-home')
-    } catch (err) {
-      toast.error(err.response?.data?.message)
-    }
-  }
   return (
-    <>
-      <div className="min-h-screen flex flex-col">
-        <div className="p-10 shadow-md">
-          <div className="flex gap-2 ">
-            <p className="font-normal flex items-end text-lg  ">Secured by</p>
-            <p className="text-3xl text-indigo-500 font-semibold">MessMate</p>
-          </div>
+    <div className="min-h-screen bg-white flex flex-col font-sans">
+      {/* Navbar Style Header */}
+      <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="text-gray-400 text-sm">Secured by</span>
+          <span className="text-2xl text-indigo-600 font-bold tracking-tight">MessMate</span>
         </div>
-        <div className="flex flex-col gap-15 sm:gap-0  sm:flex-row sm:flex-1 w-full py-25 ">
-          <div className="border-r-3 border-gray-300 w-full sm:w-1/2 px-20 py-10   ">
-            <div className=" w-full h-full flex flex-col justify-center gap-7 ">
-              <p className="text-3xl font-bold">Payment details</p>
-              <div className="flex justify-between">
-                <p className="text-2xl font-semibold">Meal </p>
-                <p className="text-xl">
-                  {" "}
-                  {mealType.toUpperCase()}/Rs.{amount}
-                </p>
+        <div className="text-right">
+          <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Amount to Pay</p>
+          <p className="text-2xl font-black text-gray-800">₹{amount}</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col lg:flex-row flex-1">
+        {/* Left Side: Order Summary */}
+        <div className="w-full lg:w-1/2 p-10 bg-gray-50 flex flex-col justify-center border-r border-gray-200">
+          <div className="max-w-md mx-auto w-full">
+            <h2 className="text-3xl font-extrabold text-gray-900 mb-8">Order Summary</h2>
+            <div className="space-y-6">
+              <div className="flex justify-between items-center bg-white p-4 rounded-xl shadow-sm">
+                <span className="text-gray-500 font-medium">Meal Plan</span>
+                <span className="font-bold text-gray-800">{mealType.toUpperCase()}</span>
               </div>
-              <div className="flex justify-between border-t-2  border-gray-300 pt-5">
-                <p className="text-2xl font-semibold">Total</p>
-                <p className="text-3xl">Rs.{amount}</p>
+              <div className="flex justify-between items-center bg-white p-4 rounded-xl shadow-sm">
+                <span className="text-gray-500 font-medium">Order ID</span>
+                <span className="font-mono text-sm text-indigo-600">{orderId}</span>
+              </div>
+              <div className="pt-6 border-t border-gray-200 flex justify-between items-center">
+                <span className="text-xl font-bold text-gray-900">Total Payable</span>
+                <span className="text-3xl font-black text-indigo-600">₹{amount}</span>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className=" w-full sm:w-1/2 px-20">
-          <div className="flex flex-col  gap-10">
-            <input type="text" className="border relative border-gray-300  px-5 py-4 rounded-2xl" value={user.name}/>
-            <input type="text" className="border  border-gray-300 px-5 py-4 rounded-2xl" value={orderId}/>
-            <input type="text" className="border border-gray-300  px-5 py-4 rounded-2xl" value={amount}/>
-          </div>
-          <div className="mt-10 text-center">
-          <p>By clicking the 'Pay' button you confirm that you have read the service </p>
-          <p>information and accept the <span className="text-indigo-500" >Data Protection Agreement</span> and <span className="text-indigo-500" >Distance Sales </span></p>
-          <p className="text-indigo-500" >Agreement</p>
-          </div>
+        {/* Right Side: Payment Action */}
+        <div className="w-full lg:w-1/2 p-10 flex flex-col items-center justify-center bg-white">
+          <div className="max-w-md w-full text-center">
+            
+            {/* QR CODE SECTION */}
+            <div className="mb-8 flex flex-col items-center">
+              <div className="p-4 bg-white border-4 border-indigo-50 shadow-xl rounded-3xl mb-4">
+                <QRCodeSVG value={upiLink} size={200} />
+              </div>
+              <p className="text-sm text-gray-500 mb-4 font-medium">Scan with GPay, PhonePe, or Paytm</p>
+              
+              {/* DEEP LINK BUTTON */}
+              <a 
+                href={upiLink}
+                className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-6 py-3 rounded-full font-bold text-sm hover:bg-indigo-100 transition-all active:scale-95"
+              >
+                Open UPI App Automatically
+              </a>
+            </div>
 
-          <div className="mt-5 ">
-            <button className="bg-indigo-500 w-full px-5 py-4 rounded-2xl text-white hover:bg-indigo-400 cursor-pointer font-bold" onClick={handleCreatePayment}>Pay {amount} Rs.</button>
-          </div>
-          
+            <div className="space-y-4 text-left">
+               <div>
+                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Step 1: Pay Amount</label>
+                 <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 text-sm text-gray-600">
+                    Pay ₹{amount} to <span className="font-bold text-gray-800">{adminUpiId}</span>
+                 </div>
+               </div>
+
+               <div>
+                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Step 2: Enter UTR Number</label>
+                 <input
+                   type="text"
+                   placeholder="12 Digit Transaction ID"
+                   className="w-full border border-gray-200 px-5 py-4 rounded-2xl focus:ring-4 focus:ring-indigo-50 outline-none transition-all text-center font-mono text-xl"
+                   value={utrNumber}
+                   onChange={(e) => setUtrNumber(e.target.value)}
+                 />
+               </div>
+
+               <button 
+                 onClick={handleCreatePayment}
+                 className="w-full bg-indigo-600 text-white font-black py-5 rounded-2xl shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all transform active:scale-[0.98]"
+               >
+                 I HAVE PAID ₹{amount}
+               </button>
+            </div>
+
+            <p className="mt-8 text-[11px] text-gray-400">
+              Payments are verified manually by Admin. Usually takes 5-10 mins.
+            </p>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

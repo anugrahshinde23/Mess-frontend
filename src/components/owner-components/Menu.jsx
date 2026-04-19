@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const UNSPLASH_API_KEY="DiPvtvT3QnhYWI7JQPKGCaVwX5arg3Ya-QL2CG-iibc"
 
-const Menu = () => {
+const Menu = ({messData}) => {
   const [getMenu, setGetMenu] = useState(null);
   
 
@@ -156,7 +156,14 @@ const Menu = () => {
       </div>
     </div>
   );
+
   
+  
+  if(!messData){
+    return <div className='flex justify-center items-center h-full'>
+    <p className='text-2xl font-bold text-zinc-500'>Mess is deactivated cannot access Menu</p>
+  </div>
+  }
   
 
   if (!getMenu)

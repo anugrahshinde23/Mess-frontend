@@ -34,13 +34,14 @@ const PlaceOrderModal = ({onClose, messId, oneTimePrice}) => {
     try {
       const res = await oneTimeOrderApi({
         messId,
-        mealType: selectedMeal
+        mealType: selectedMeal,
+        price : oneTimePrice
       });
   
       toast.success(res.message);
   
       // ✅ decision based on API response
-      if (res.orderData) {
+      if (res.orderData ) {
         navigate("/pay", {
           state: { orderId: res.orderData._id,
             amount : oneTimePrice,
@@ -54,6 +55,7 @@ const PlaceOrderModal = ({onClose, messId, oneTimePrice}) => {
   
     } catch (err) {
       toast.error(err.response?.data?.message);
+      
     }
   };
 

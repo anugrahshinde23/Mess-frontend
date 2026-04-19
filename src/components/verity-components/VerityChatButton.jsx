@@ -7,7 +7,7 @@ const VerityChatButton = () => {
   const location = useLocation() // 2. Current path check karne ke liye
 
   // 3. Agar path '/verity' hai, toh button return mat karo (Hide)
-  if (location.pathname === '/verity') {
+  if (location.pathname === '/verity' || location.pathname === 'admin-dashboard') {
     return null;
   }
 

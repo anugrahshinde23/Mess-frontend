@@ -11,7 +11,9 @@ const SideBar = ({activeTab, setActiveTab}) => {
     { id: "tab4", label: "Delivery Boy" },
     { id: "tab5", label: "Menu" },
     { id: "tab6", label: "Plans" },
-    { id: "tab7", label : "Settings" }
+    { id: "tab8", label : "Wallet" },
+    { id: "tab7", label : "Settings" },
+    
   ]
 
   return (

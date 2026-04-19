@@ -3,6 +3,7 @@ import Dashboard from './Dashboard'
 import Messes from './Messes'
 import Orders from './Orders'
 import Settings from './Settings'
+import Wallet from './Wallet'
 
 const TopBar = ({dBoy, logout}) => {
 
@@ -13,7 +14,8 @@ const TopBar = ({dBoy, logout}) => {
     {id: "tab1", label: "Dashboard" },
     {id: "tab2", label: "Messes"},
     {id: "tab3", label: "Orders"},
-    {id: "tab4", label: "Settings"}
+    {id: "tab4", label: "Wallet"},
+    {id: "tab5", label: "Settings"}
   ]
 
 
@@ -44,12 +46,13 @@ const TopBar = ({dBoy, logout}) => {
 
 
 {/* TAB CONTENT */}
-<div className="my-6 bg-white border border-zinc-300 rounded-xl shadow-sm p-6 min-h-[600px] overflow-auto">
+<div className="my-6  bg-white border border-zinc-300 rounded-xl shadow-sm p-6  overflow-auto">
 
   {activeTab === "tab1" && <Dashboard />}
   {activeTab === "tab2" && <Messes dBoy={dBoy} />}
   {activeTab === "tab3" && <Orders dBoy={dBoy} />}
-  {activeTab === "tab4" && <Settings logout={logout} />}
+  {activeTab === "tab4" && <Wallet dBoy={dBoy} />}
+  {activeTab === "tab5" && <Settings logout={logout} />}
 
 </div>
 

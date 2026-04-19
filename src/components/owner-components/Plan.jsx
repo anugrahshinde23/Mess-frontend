@@ -83,6 +83,12 @@ const Plan = ({ messData, handleGetMessData }) => {
     handleGetMessData();
   }, []);
 
+  if(!messData) {
+    return <div className='flex justify-center items-center h-full'>
+    <p className='text-2xl font-bold text-zinc-500'>Mess is deactivated cannot access Plan</p>
+  </div>
+  }
+
   return (
     <>
       <div className="grid grid-cols-1 items-center h-full sm:grid-cols-2 lg:grid-cols-4  gap-10 px-15 py-10  ">

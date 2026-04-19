@@ -219,7 +219,7 @@ const MessDetailPage = () => {
 
     {/* ---------- MESS HEADER ---------- */}
 
-    <div className="bg-white border border-zinc-300 shadow-md rounded-xl p-8 mt-6 flex flex-col gap-4">
+    <div id="customer-mess-detail-page" className="bg-white border border-zinc-300 shadow-md rounded-xl p-8 mt-6 flex flex-col gap-4">
 
       <p className="text-4xl font-bold text-zinc-800">
         {mess?.messData?.name}
@@ -250,7 +250,7 @@ const MessDetailPage = () => {
 
     {/* ---------- TODAY MENU ---------- */}
 
-    <div className="flex flex-col gap-8">
+    <div id="customer-mess-menu" className="flex flex-col gap-8">
 
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold">Today's Menu</h2>
@@ -281,7 +281,7 @@ const MessDetailPage = () => {
 
     {/* ---------- PLANS ---------- */}
 
-    <div className="flex flex-col gap-8">
+    <div id="customer-subscription-plans" className="flex flex-col gap-8">
 
       <h2 className="text-3xl font-bold">Subscription Plans</h2>
 

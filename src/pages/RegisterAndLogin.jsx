@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { loginApi, registerApi } from "../services/auth.services";
@@ -10,7 +10,7 @@ import TextType from '../utils/TextType';
 
 
 const RegisterAndLogin = () => {
-  const [isLoginActive, setIsLoginActive] = useState(false);
+  const [isLoginActive, setIsLoginActive] = useState(true);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -53,7 +53,9 @@ const RegisterAndLogin = () => {
 
       login(res.data, res.accessToken);
 
-      console.log(res);
+      window.isDemoLoginSuccess = true;
+
+      
       toast.success(res.message);
 
       setTimeout(() => {
@@ -68,7 +70,7 @@ const RegisterAndLogin = () => {
         }
       }, 1500);
     } catch (error) {
-      toast.error("Login Failed");
+      toast.error(error.response?.data?.message);
     } finally {
       setLoading(false);
     }
@@ -88,7 +90,7 @@ const RegisterAndLogin = () => {
         address,
         pincode,
       });
-      console.log(res);
+     
       toast.success(res.message);
 
       setTimeout(() => {
@@ -101,6 +103,13 @@ const RegisterAndLogin = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    window.setDemoLogin = (phoneValue, passwordValue) => {
+      setPhone(phoneValue);
+      setPassword(passwordValue);
+    };
+  }, []);
 
   return (
     <>
@@ -146,6 +155,7 @@ const RegisterAndLogin = () => {
             >
               <input
                 type="text"
+                id="demo-phone"
                 name="phone"
                 placeholder="Enter Phone"
                 onChange={(e) => setPhone(e.target.value)}
@@ -155,6 +165,7 @@ const RegisterAndLogin = () => {
               <input
                 type= {passVisibility  === true ? "password" : "text" }
                 name="password"
+                id="demo-password"
                 placeholder="Enter Password"
                 onChange={(e) => setPassword(e.target.value)}
                 className=" relative rounded-2xl bg-zinc-300  px-3 py-2 w-full sm:px-4 sm:py-3"
@@ -182,7 +193,7 @@ const RegisterAndLogin = () => {
               </div>
 
               <div className="bg-indigo-500 flex  justify-center w-2/3 md:w-1/2 rounded-2xl">
-              <button className="px-3 py-2 sm:px-4 sm:py-3 text-white font-bold " type="submit" disabled={Loading}>
+              <button id="demo-login-btn" className="px-3 py-2 sm:px-4 sm:py-3 text-white font-bold " type="submit" disabled={Loading}>
   {Loading ? (
     <svg className="animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

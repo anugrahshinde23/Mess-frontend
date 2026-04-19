@@ -34,8 +34,8 @@ const navigate = useNavigate()
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 m-15 gap-15">
-        {allMesses?.messData.map((items) => (
-          <div className="border border-zinc-400 rounded-4xl p-5" key={items._id}>
+        {allMesses?.messData.map((items, index) => (
+          <div id={`customer-mess-listing-${index}`} className="border border-zinc-400 rounded-4xl p-5" key={items._id}>
             <div className="flex justify-between">
               <p className="text-2xl font-semibold">{items.name}</p>
               {items.isActive ? (
@@ -60,11 +60,20 @@ const navigate = useNavigate()
             </div>
 
             <div className="text-sm flex items-center justify-between gap-1  text-zinc-500 font-bold text-end mt-5 hover:text-zinc-400 cursor-pointer">
-              <button className="text-sm bg-indigo-500 px-2 py-1 text-white hover:bg-indigo-400 cursor-pointer rounded-full" onClick={() => {
-                
-                navigate(`/mess-detail/${items._id}`)
-                
-              }}>Explore</button>
+            <button 
+            id={`customer-mess-explore-btn-${index}`}
+  className={`text-sm bg-indigo-500 px-2 py-1 text-white hover:bg-indigo-400 rounded-full 
+    ${items.isActive === false ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} `} 
+  onClick={() => { 
+    if (items.isActive !== false) {
+      navigate(`/mess-detail/${items._id}`);
+    }
+  }}
+  disabled={items.isActive === false} // This actually stops the click
+>
+  Explore
+</button>
+
               <div className="flex items-center gap-1.5">
               <p onClick={() => {
                 

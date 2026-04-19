@@ -74,12 +74,19 @@ const Navbar = ({handleLogout}) => {
   }, [])
   
 
+  useEffect(() => {
+    if (window.openProfileModal) {
+      setIsActive(true);
+      window.openProfileModal = false; // reset
+    }
+  }, []);
+
 
   return (
     <>
     
     
-    <div className='flex justify-between px-1 sm:px-15 py-5 sm:py-10  border-b border-indigo-500 mx-15 items-center'>
+    <div id='customer-nav' className='flex justify-between px-1 sm:px-15 py-5 sm:py-10  border-b border-indigo-500 mx-15 items-center'>
         <div>
             <p className='text-2xl font-bold text-indigo-500 '>MessMate</p>
         </div>
@@ -95,7 +102,7 @@ const Navbar = ({handleLogout}) => {
         <div className='flex gap-2 items-center'>
           
          <div>
-         <MaterialDesignIcons.MdOutlineNotifications  className='relative cursor-pointer' size={25} onClick={
+         <MaterialDesignIcons.MdOutlineNotifications id='customer-notification'  className='relative cursor-pointer' size={25} onClick={
             () => {
               setNotifyModal(true)
               
@@ -105,7 +112,9 @@ const Navbar = ({handleLogout}) => {
   <div className="p-1 bg-green-500 rounded-full absolute top-11 right-45"></div>
 )}
          </div>
-            <MaterialDesignIcons.MdPersonOutline className='cursor-pointer' onClick={handleProfileIsActive} size={30}/>
+           <div id='user-profile'  onClick={handleProfileIsActive}>
+           <MaterialDesignIcons.MdPersonOutline className='cursor-pointer' onClick={handleProfileIsActive} size={30}/>
+           </div>
             <MaterialDesignIcons.MdOutlineMenu className='cursor-pointer sm:hidden' onClick={() => {
               setMenuOpen(true)
             }} size={30}/>

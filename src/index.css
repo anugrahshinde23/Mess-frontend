@@ -46,4 +46,124 @@
       scrollbar-color: #6366f1 #f3f4f6;
     }
   }  
-  
+
+/* --- MAIN POPUP CONTAINER --- */
+.shepherd-element {
+  background: rgba(97, 95, 255, 0.95) !important; /* Semi-transparent purple */
+  backdrop-filter: blur(12px);
+  border-radius: 24px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 
+              inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+  padding: 12px !important;
+  max-width: 320px !important;
+  overflow: hidden;
+}
+
+/* --- CONTENT AREA --- */
+.shepherd-text {
+  padding: 1.5rem 1rem 0.5rem 1rem !important;
+  color: #ffffff !important;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  letter-spacing: -0.01em;
+}
+
+/* --- FOOTER / BUTTONS AREA --- */
+.shepherd-footer {
+  padding: 1rem !important;
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- UNIVERSAL BUTTON STYLING --- */
+.shepherd-button {
+  height: 40px;
+  padding: 0 16px !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: none !important;
+}
+
+/* STOP BUTTON (Left side) */
+.btn-stop {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-right: auto; /* Pushes Back/Next to the right */
+}
+
+.btn-stop:hover {
+  background: rgba(239, 68, 68, 0.2) !important; /* Subtle red tint */
+  color: #fca5a5 !important;
+}
+
+/* BACK BUTTON */
+.btn-back {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.btn-back:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* NEXT BUTTON (The Primary Action) */
+.btn-next {
+  background: #ffffff !important;
+  color: #615fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2) !important;
+  background: #f8f9ff !important;
+}
+
+/* --- OVERLAY BLUR --- */
+.shepherd-modal-overlay-container {
+  backdrop-filter: blur(4px);
+  opacity: 0.4 !important;
+}
+
+/* --- THE ARROW --- */
+.shepherd-arrow::before {
+  background: rgba(97, 95, 255, 0.95) !important;
+}
+
+.demo-click-highlight {
+  outline: 3px solid #6366f1;
+  outline-offset: 4px;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+}
+
+.demo-click-press {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+/* .demo-click-highlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(99, 102, 241, 0.2);
+  animation: ripple 0.4s ease;
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+} */

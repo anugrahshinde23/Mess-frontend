@@ -62,7 +62,7 @@ const Orders = ({dBoy}) => {
 
     try {
       const res = await getOrderReqApi(dBoyId)
-      // console.log(res);
+      console.log(res);
       setOrderReq(res.reqData)
       // toast.success(res.message)
     } catch (error) {
