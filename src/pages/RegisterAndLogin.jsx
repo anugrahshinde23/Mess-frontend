@@ -161,26 +161,30 @@ const RegisterAndLogin = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 className=" rounded-2xl bg-zinc-300 px-3 py-2 sm:px-4 sm:py-3"
               />
-              <div className="">
-              <input
-                type= {passVisibility  === true ? "password" : "text" }
-                name="password"
-                id="demo-password"
-                placeholder="Enter Password"
-                onChange={(e) => setPassword(e.target.value)}
-                className=" relative rounded-2xl bg-zinc-300  px-3 py-2 w-full sm:px-4 sm:py-3"
-              />
+           <div className="relative w-full">
+  <input
+    type={passVisibility ? "password" : "text"}
+    name="password"
+    id="demo-password"
+    placeholder="Enter Password"
+    onChange={(e) => setPassword(e.target.value)}
+    className="rounded-2xl bg-zinc-300 px-3 py-2 w-full sm:px-4 sm:py-3 pr-10"
+  />
 
-
-
-              {passVisibility === true ? (
-                <MaterialDesignIcons.MdVisibility size={20} className="absolute right-55 top-99 cursor-pointer" onClick={handleTogglePassVisibility}/>
-              ) : (
-
-                <MaterialDesignIcons.MdVisibilityOff size={20} className="absolute right-55 top-99 cursor-pointer" onClick={handleTogglePassVisibility}/>
-              )}
-              
-              </div>
+  {passVisibility ? (
+    <MaterialDesignIcons.MdVisibility
+      size={20}
+      className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+      onClick={handleTogglePassVisibility}
+    />
+  ) : (
+    <MaterialDesignIcons.MdVisibilityOff
+      size={20}
+      className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+      onClick={handleTogglePassVisibility}
+    />
+  )}
+</div>
 
             
 

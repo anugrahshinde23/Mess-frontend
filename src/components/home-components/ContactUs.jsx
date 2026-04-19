@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { createFeedbackApi } from '../../services/feedback.services'
+import { toast } from 'react-toastify'
 
 const ContactUs = () => {
 
@@ -13,8 +15,23 @@ const ContactUs = () => {
   const handleCreateFeedBack = async (e) => {
     e.preventDefault()
 
-    alert(name)
-    console.log(name, email, phone,message);
+    try {
+        const res = await createFeedbackApi({name,email, phone, message})
+
+        if(res.success){
+        toast.success(res.message)
+        setName("")
+        setEmail("")
+        setPhone("")
+        setMessage("")
+        }
+        
+
+    } catch (error) {
+        toast.error(error.response?.data?.message)
+    }
+
+    
     
 
   }
@@ -56,18 +73,20 @@ const ContactUs = () => {
                     <p className='text-zinc-600'>You can reach us anytime</p>
                     </div>
 
-                    <form className='flex flex-col gap-5'>
-                        <input onChange={(e) => setName(e.target.value)} name='name' type="text" placeholder='Full Name' className='border border-zinc-300 p-3 rounded-2xl' />
-                        <input onChange={(e) => setEmail(e.target.value)} name='email' type="text" placeholder='Email' className='border border-zinc-300 p-3 rounded-2xl' />
-                        <input onChange={(e) => setPhone(e.target.value)} name='phone' type="text" placeholder='Phone' className='border border-zinc-300 p-3 rounded-2xl' />
-                        <textarea onChange={(e) => setMessage(e.target.value)} name='message' rows="5" placeholder='Leave a message'  id="" className='border border-zinc-300 p-3 rounded-2xl'>
+                    <form className='flex flex-col gap-5' onSubmit={handleCreateFeedBack} >
+                        <input value={name} onChange={(e) => setName(e.target.value)} required  name='name' type="text" placeholder='Full Name' className='border border-zinc-300 p-3 rounded-2xl' />
+                        <input value={email} onChange={(e) => setEmail(e.target.value)} required  name='email' type="text" placeholder='Email' className='border border-zinc-300 p-3 rounded-2xl' />
+                        <input value={phone} onChange={(e) => setPhone(e.target.value)} required name='phone' type="text" placeholder='Phone' className='border border-zinc-300 p-3 rounded-2xl' />
+                        <textarea value={message} onChange={(e) => setMessage(e.target.value)} required  name='message' rows="5" placeholder='Leave a message'  id="" className='border border-zinc-300 p-3 rounded-2xl'>
 
                         </textarea>
-                    </form>
-                    <div className='flex flex-col gap-2'>
-                        <button onClick={handleCreateFeedBack} className='bg-indigo-500 rounded-2xl hover:bg-indigo-400 text-sm font-bold cursor-pointer p-3 text-white'>Submit</button>
+                        <div className='flex flex-col gap-2'>
+                        <button type='submit' className='bg-indigo-500 rounded-2xl hover:bg-indigo-400 text-sm font-bold cursor-pointer p-3 text-white'>Submit</button>
                         <p></p>
                     </div>
+                        
+                    </form>
+                    
                 </div>
             </div>
         </div>

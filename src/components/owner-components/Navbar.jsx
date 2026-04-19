@@ -52,7 +52,8 @@ const { user } = useAuth()
             <p className='text-2xl font-medium text-indigo-500'>MessMate</p>
         </div>
         <div className='w-1/3 hidden lg:block '>
-            <input className='border w-full p-1' type="text" />
+        
+            <input className='border rounded w-full p-1 border-zinc-400 hover:border-indigo-500' type="text" />
         </div>
         <div className='flex items-center gap-5 '>
             <div className='flex gap-1 items-center' >
